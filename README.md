@@ -1,1 +1,1 @@
-Web component like iOS swipe actions
+Web component like iOS swipe actions with Polymer

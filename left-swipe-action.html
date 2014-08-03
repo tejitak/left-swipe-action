@@ -39,11 +39,57 @@
         </div>
     </template>
     <script>
+
         Polymer({
+
             open: false,
+
+            eventDelegates: {
+                down: 'downAction',
+                track: 'trackAction',
+                up: 'upAction'
+            },
+
+            ready: function() {
+
+            },
+
+            downAction: function(e){
+                if(e.target.localName == "left-swipe-action-button"){
+                    return;
+                }
+                // setup move event
+                console.log("down");
+                console.log("e.x: " + e.x);
+                console.log("e.screenX: " + e.screenX);
+                console.log("e.clientX: " + e.clientX);
+                // store current position
+                this._point = {x: e.x};
+            },
+
+            trackAction: function(e){
+                console.log("track");
+                console.log("e.x: " + e.x);
+                console.log("e.screenX: " + e.screenX);
+                console.log("e.clientX: " + e.clientX);
+                if(this._point){
+                    console.log(e.x);
+                }
+            },
+
+            upAction: function(e){
+                // detach move event
+                this._point = null;
+                if(e.target.localName == "left-swipe-action-button"){
+                    return;
+                }
+                console.log("up");
+                console.log(e);
+            },
 
             contentTapped: function(event, detail, sender) {
                 console.log(arguments);
+
                 this.open = !this.open;
             }
         });

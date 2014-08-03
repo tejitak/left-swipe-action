@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>unquote</title>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <script src="./bower_components/platform/platform.js"></script>
+  <link rel="import" href="./bower_components/polymer/polymer.html">
+  <link rel="import" href="left-swipe-action.html">
+  <style>
+  html,body {
+    height: 100%;
+    margin: 0;
+    background-color: #E5E5E5;
+  }
+  
+  .container {
+    width: 80%;
+    margin: 50px auto;
+  }
+  </style>
+</head>
+
+<body unresolved touch-action="auto">
+  <div class="container" layout vertical center>
+
+    <div>
+        Simple
+    </div>
+    <left-swipe-action>
+        <div style="background-color: #9F499B;">
+            <div>Title</div>
+            <div>Description</div>
+        </div>
+        <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+    </left-swipe-action>
+
+    <div>
+        Fixed height
+    </div>
+    <left-swipe-action>
+        <div style="height: 120px; background-color: #fff;">
+            <div>Title</div>
+            <div>Description</div>
+        </div>
+        <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+    </left-swipe-action>
+
+    <div>
+        Two action buttons
+    </div>
+    <left-swipe-action>
+        <div style="height: 120px; background-color: #fff;">
+            <div>Title</div>
+            <div>Description</div>
+        </div>
+        <left-swipe-action-button onclick="alert('star')">Star</left-swipe-action-button>
+        <left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('delete')">Delete</left-swipe-action-button>
+    </left-swipe-action>
+
+
+
+  </div>
+<script>
+</script>
+</body>
+
+</html>
