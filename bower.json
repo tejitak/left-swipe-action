@@ -1,0 +1,11 @@
+{
+  "name": "left-swipe-action",
+  "version": "0.0.0",
+  "authors": [
+    "tejitak <tejitak@hotmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.4"
+  }
+}

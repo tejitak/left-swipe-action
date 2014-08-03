@@ -1,0 +1,28 @@
+<polymer-element name="left-swipe-action-button">
+    <template>
+        <style>
+            :host {
+                position: relative;
+                height: 100%;
+                padding: 0 20px;
+                display: table;
+                background-color: #E81D62;
+            }
+
+            .action-button-wrapper {
+                margin: 0;
+                font-size: 1.8rem;
+                font-weight: 300;
+                text-decoration: none;
+                display: table-cell;
+                vertical-align: middle;
+            }
+        </style>
+        <div class="action-button-wrapper">
+            <content></content>
+        </div>
+    </template>
+    <script>
+        Polymer({});
+    </script>
+</polymer-element>
