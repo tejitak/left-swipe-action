@@ -6,6 +6,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.3.4"
+    "polymer": "Polymer/polymer#~0.3.4",
+    "pointerevents-polyfill": "~0.2.0"
   }
 }

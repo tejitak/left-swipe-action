@@ -2,10 +2,12 @@
 <html>
 
 <head>
-  <title>unquote</title>
+  <title>left-swipe-action-button</title>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <script src="./bower_components/platform/platform.js"></script>
-  <link rel="import" href="./bower_components/polymer/polymer.html">
+  <script src="bower_components/platform/platform.js"></script>
+  <script src="bower_components/pointerevents-polyfill/pointerevents.min.js"></script>
+
+  <link rel="import" href="bower_components/polymer/polymer.html">
   <link rel="import" href="left-swipe-action.html">
   <style>
   html,body {
@@ -24,7 +26,7 @@
 <body unresolved touch-action="auto">
   <div class="container" layout vertical center>
 
-    <left-swipe-action>
+    <left-swipe-action touch-action="none">
         <div style="height: 120px; background-color: #fff;">
             <div>Title</div>
             <div>Description</div>
