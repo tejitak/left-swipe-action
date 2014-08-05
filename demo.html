@@ -18,23 +18,129 @@
             width: 80%;
             margin: 50px auto;
         }
+
+        #underlay_background /deep/ .swipe-container {
+            background-color: yellow;
+        }
     </style>
 </head>
 <body unresolved touch-action="auto">
-    <div class="container" layout vertical center>
-
-        <div>
-            Simple
+    <div>
+        <div class="container">
+            <h1>left-swipe-action</h1>
+            <div>The poylmer web component "left-swipe-action" enables a left swipe gesture to open a content and show behind action buttons like iOS item list.</div>
         </div>
-
+        <div>Simple</div>
         <div>
-            Fixed height
+            <left-swipe-action touch-action="pan-y">
+                <div>
+                    <div>Title</div>
+                    <div>Description</div>
+                    <div><strong>Swipe me to left</strong></div>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+            </left-swipe-action>
         </div>
-
+        <div><h2>Style customization example</h2></div>
+        <div>Fixed height</div>
         <div>
-            Two action buttons
+            <left-swipe-action touch-action="pan-y">
+                <div style="height: 100px;">
+                    <div>Title</div>
+                    <div><strong>Swipe me to left</strong></div>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+            </left-swipe-action>
         </div>
-
+        <div>Background-color</div>
+        <div>
+            <left-swipe-action touch-action="pan-y">
+                <div style="height: 100px; background-color: green;">
+                    <div>Title</div>
+                    <div><strong>Swipe me to left</strong></div>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <div>Background-color for underlay</div>
+        <div>
+            <left-swipe-action id="underlay_background" touch-action="pan-y">
+                <div style="height: 100px;">
+                    <div>Title</div>
+                    <div><strong>Swipe me to left</strong></div>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <div>Multi actions</div>
+        <div>
+            <left-swipe-action touch-action="pan-y">
+                <div style="height: 100px;">
+                    <div>Title</div>
+                    <div><strong>Swipe me to left</strong></div>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+                <left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <div>Multi actions with icons</div>
+        <div>
+            <left-swipe-action touch-action="pan-y" style="background-color: #aaa;">
+                <div style="height: 100px;">
+                    <div>Title</div>
+                    <div><strong>Swipe me to left</strong></div>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+                <left-swipe-action-button style="color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
+                <left-swipe-action-button onclick="alert('star')">Star</left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <div>within container</div>
+        <div style="width: 80%; margin: 20px auto;">
+            <left-swipe-action touch-action="pan-y">
+                <div>
+                    <div>Title</div>
+                    <div>Description</div>
+                    <div><strong>Swipe me to left</strong></div>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <div><h2>Attributes customization example</h2></div>
+        <div>Open state (open="true")</div>
+        <div>
+            <left-swipe-action touch-action="pan-y" open>
+                <div style="height: 100px;">
+                    <div>Title</div>
+                    <div><strong>Swipe me to left</strong></div>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+                <left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <div>
+            Disable drag/trouch move (nodrag="true")
+        </div>
+        <div>
+            <left-swipe-action touch-action="pan-y" nodrag>
+                <div style="height: 100px;">
+                    <div>Swipe is disabled</div>
+                    <div><strong>Click me instead of swipe</strong></div>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+                <left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <div>Offset for opened states (offset="280")</div>
+        <div>
+            <left-swipe-action touch-action="pan-y" offset="240">
+                <div style="height: 100px;">
+                    <div>Offset</div>
+                    <div><strong>Swipe me to left</strong></div>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+            </left-swipe-action>
+        </div>
 
     </div>
 </body>

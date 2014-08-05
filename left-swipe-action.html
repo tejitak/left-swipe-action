@@ -1,7 +1,9 @@
 <!--
-'left-swipe-action' enable a swipe gesture to open a content and show behind action buttons like iOS item list.
+'left-swipe-action' enables a left swipe gesture to open a content and show behind action buttons like iOS item list.
 
-    <left-swipe-action>
+This component wraps your own element and the wrapper handles gesture events. The main content will be opened by a left swipe and specified buttons 'left-swipe-action-button' will be shown behind of the content. The other gestures on the component will close the content.
+
+    <left-swipe-action touch-action="pan-y">
         <div>
             <div>Title</div>
             <div>Description</div>
@@ -13,7 +15,7 @@
 The elements other than left-swipe-action-button will be inserted to shadow DOM as main content.
 'left-swipe-action-button' is a button to be fit with a content height. These are aligned as table cells.
 
-CSS for the main content and buttons in light DOM will be applied.
+CSS for both the main content and buttons in light DOM will be just applied.
 
 @element left-swipe-action
 -->
@@ -57,11 +59,13 @@ CSS for the main content and buttons in light DOM will be applied.
                 transition: transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
             }
         </style>
-        <div class="swipe-underlay" layout horizontal reverse center>
-            <content select="left-swipe-action-button"></content>
-        </div>
-        <div id="content" class="swipe-content fixed-{{!point.updated}} open-{{open}}">
-            <content></content>
+        <div class="swipe-container" layout vertical>
+            <div class="swipe-underlay" layout horizontal reverse center>
+                <content select="left-swipe-action-button"></content>
+            </div>
+            <div id="content" class="swipe-content fixed-{{!point.updated}} open-{{open}}">
+                <content></content>
+            </div>
         </div>
     </template>
     <script>
