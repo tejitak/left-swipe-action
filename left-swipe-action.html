@@ -17,19 +17,11 @@
             }
 
             .swipe-content {
-                position: relative;
-                -webkit-transform: translate3d(0, 0, 0);
-                -moz-transform: translate3d(0, 0, 0);
-                -ms-transform: translate3d(0, 0, 0);
-                -o-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-
                 -webkit-transform-style: preserve-3d;
                 -moz-transform-style: preserve-3d;
                 -ms-transform-style: preserve-3d;
                 -o-transform-style: preserve-3d;
                 transform-style: preserve-3d;
-
                 -webkit-backface-visibility: hidden;
                 -moz-backface-visibility: hidden;
                 -ms-backface-visibility: hidden;
@@ -45,7 +37,6 @@
                 transition: transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
             }
         </style>
-
         <div class="swipe-underlay" layout horizontal reverse center>
             <content select="left-swipe-action-button"></content>
         </div>
@@ -55,13 +46,13 @@
     </template>
     <script>
 
-        function xPoint(x){
+        var xPoint = function(x){
             this.updated = false;
-            this.x = this._origin = x;
+            this.x = this._prev = this._origin = x;
             this._timeStamp = (new Date()).getTime();
         };
         xPoint.prototype = {
-            MIN_VELOCITY: 0.5 /* px/ms */,
+            MIN_VELOCITY: -0.5 /* px/ms */,
 
             distance: function(){
                 return this.x - this._origin;
@@ -71,6 +62,7 @@
                 // reset time stamp at move stop
                 if(x - this.x > -5){
                     this._timeStamp = (new Date()).getTime();
+                    this._prev = this.x;
                 }
                 this.x = x;
                 this.updated = true;
@@ -78,23 +70,22 @@
 
             isFlick: function(){
                 var dt = (new Date()).getTime() - this._timeStamp;
-                var dx = this.distance();
-                var v = -(dx / dt);
-                return v > this.MIN_VELOCITY;
+                var dx = this.x - this._prev;
+                var v = dx / dt;
+                return v < this.MIN_VELOCITY;
             }
         };
 
-        function setTranslate(n, move){
-            setTransform(n, "translate3d(" + move + "px, 0, 0)");
-        }
-
-        function setTransform(n, value){
-            n.style.webkitTransform = value;
-            n.style.MozTransform = value;
-            n.style.msTransform = value;
-            n.style.OTransform = value;
-            n.style.transform = value;
-        }
+        var util = {
+            applyTransform: function(n, move){
+                var value = "translate3d(" + move + "px, 0, 0)";
+                n.style.webkitTransform = value;
+                n.style.MozTransform = value;
+                n.style.msTransform = value;
+                n.style.OTransform = value;
+                n.style.transform = value;
+            }
+        }; 
 
         Polymer({
             /**
@@ -133,37 +124,35 @@
                     this.$.content.addEventListener("pointerup", this.onUp.bind(this));
                     this.$.content.addEventListener("pointerout", this.onUp.bind(this));
                 }
+                this.transition();
             },
 
             onDown: function(e){
-                // store current position
-                this.point = new xPoint(e.x);
+                this.point = new xPoint(e.clientX);
             },
 
             onMove: function(e){
                 if(this.point){
-                    this.point.update(e.x);
-                    setTranslate(this.$.content, this.point.distance());
+                    this.point.update(e.clientX);
+                    util.applyTransform(this.$.content, this.open ? this.offset - this.$.content.clientWidth + this.point.distance() : this.point.distance());
                 }
             },
 
             onUp: function(e){
                 if(!this.point){ return; }
                 this.open = this.point && this.point.isFlick();
-                if(!this.open){
-                    setTranslate(this.$.content, 0);
-                }
                 this.point = null;
+                // apply css fixed-true first
+                this.async(this.transition);
             },
 
-            openChanged: function(oldValue, newValue){
-                var n = this.$.content;
-                var offset = newValue ? this.offset - n.clientWidth : 0;
-                setTranslate(n, offset);
+            transition: function(){
+                util.applyTransform(this.$.content, this.open ? this.offset - this.$.content.clientWidth : 0);
             },
 
             toggleOpen: function(){
                 this.open = !this.open;
+                this.transition();
             }
         });
     </script>
