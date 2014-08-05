@@ -26,18 +26,20 @@ CSS for both the main content and buttons in light DOM will be just applied.
         <style>
             :host {
                 position: relative;
-                width: 100%;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
             }
 
             .swipe-underlay {
                 position: absolute;
-                width: 75%;
-                height: 100%;
                 right: 0;
-                display: table;
+                width: 100%;
+                height: 100%;
             }
 
             .swipe-content {
+                width: 100%;
                 background-color: #fff;
                 -webkit-transform-style: preserve-3d;
                 -moz-transform-style: preserve-3d;
@@ -59,13 +61,11 @@ CSS for both the main content and buttons in light DOM will be just applied.
                 transition: transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
             }
         </style>
-        <div class="swipe-container" layout vertical>
-            <div class="swipe-underlay" layout horizontal reverse center>
-                <content select="left-swipe-action-button"></content>
-            </div>
-            <div id="content" class="swipe-content fixed-{{!point.updated}} open-{{open}}">
-                <content></content>
-            </div>
+        <div class="swipe-underlay" layout horizontal reverse>
+            <content select="left-swipe-action-button"></content>
+        </div>
+        <div id="content" class="swipe-content fixed-{{!point.updated}} open-{{open}}">
+            <content></content>
         </div>
     </template>
     <script>

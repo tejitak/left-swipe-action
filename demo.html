@@ -18,17 +18,13 @@
             width: 80%;
             margin: 50px auto;
         }
-
-        #underlay_background /deep/ .swipe-container {
-            background-color: yellow;
-        }
     </style>
 </head>
 <body unresolved touch-action="auto">
     <div>
         <div class="container">
             <h1>left-swipe-action</h1>
-            <div>The poylmer web component "left-swipe-action" enables a left swipe gesture to open a content and show behind action buttons like iOS item list.</div>
+            <div>The polymer web component "left-swipe-action" enables a left swipe gesture to open a content and show behind action buttons like iOS item list.</div>
         </div>
         <div>Simple</div>
         <div>
@@ -64,7 +60,7 @@
         </div>
         <div>Background-color for underlay</div>
         <div>
-            <left-swipe-action id="underlay_background" touch-action="pan-y">
+            <left-swipe-action id="underlay_background" touch-action="pan-y" style="background-color: yellow;">
                 <div style="height: 100px;">
                     <div>Title</div>
                     <div><strong>Swipe me to left</strong></div>
@@ -85,7 +81,7 @@
         </div>
         <div>Multi actions with icons</div>
         <div>
-            <left-swipe-action touch-action="pan-y" style="background-color: #aaa;">
+            <left-swipe-action touch-action="pan-y">
                 <div style="height: 100px;">
                     <div>Title</div>
                     <div><strong>Swipe me to left</strong></div>
