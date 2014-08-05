@@ -1,6 +1,6 @@
 <link rel="import" href="left-swipe-action-button.html">
 
-<polymer-element name="left-swipe-action" attributes="open nodrag">
+<polymer-element name="left-swipe-action" attributes="open nodrag offset">
     <template>
         <style>
             :host {
@@ -42,23 +42,7 @@
                 -moz-transition: -moz-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
                 -ms-transition: -ms-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
                 -o-transition: -o-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
-                transition: transform .5s cubic-bezier(.10, .70, .10, 1) .05s;            
-            }
-
-            .fixed-true.open-true {
-                -webkit-transform: translate3d(-80%, 0, 0);
-                -moz-transform: translate3d(-80%, 0, 0);
-                -ms-transform: translate3d(-80%, 0, 0);
-                -o-transform: translate3d(-80%, 0, 0);
-                transform: translate3d(-80%, 0, 0);
-            }
-
-            .fixed-true.open-false {
- /*               -webkit-transform: translate3d(0, 0, 0);
-                -moz-transform: translate3d(0, 0, 0);
-                -ms-transform: translate3d(0, 0, 0);
-                -o-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);*/
+                transition: transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
             }
         </style>
 
@@ -84,10 +68,8 @@
             },
 
             update: function(x){
-                console.log(x - this.x);
                 // reset time stamp at move stop
                 if(x - this.x > -5){
-                    console.log("refresh timestamp!!")
                     this._timeStamp = (new Date()).getTime();
                 }
                 this.x = x;
@@ -98,17 +80,12 @@
                 var dt = (new Date()).getTime() - this._timeStamp;
                 var dx = this.distance();
                 var v = -(dx / dt);
-                console.log(v);
                 return v > this.MIN_VELOCITY;
             }
         };
 
         function setTranslate(n, move){
             setTransform(n, "translate3d(" + move + "px, 0, 0)");
-        }
-
-        function clearTranslate(n){
-            setTransform(n, "");
         }
 
         function setTransform(n, value){
@@ -138,6 +115,15 @@
              */
             nodrag: false,
 
+            /**
+             * offset pixcel position for opened state
+             *
+             * @attribute offset
+             * @type number
+             * @default 60
+             */
+            offset: 60,
+
             ready: function(){
                 if(this.nodrag){
                     this.$.content.addEventListener("pointerup", this.toggleOpen.bind(this));
@@ -145,12 +131,11 @@
                     this.$.content.addEventListener("pointerdown", this.onDown.bind(this));
                     this.$.content.addEventListener("pointermove", this.onMove.bind(this));
                     this.$.content.addEventListener("pointerup", this.onUp.bind(this));
+                    this.$.content.addEventListener("pointerout", this.onUp.bind(this));
                 }
             },
 
             onDown: function(e){
-                // setup move event
-                console.log("down");
                 // store current position
                 this.point = new xPoint(e.x);
             },
@@ -163,11 +148,18 @@
             },
 
             onUp: function(e){
-                console.log("up");
-                clearTranslate(this.$.content);
+                if(!this.point){ return; }
                 this.open = this.point && this.point.isFlick();
+                if(!this.open){
+                    setTranslate(this.$.content, 0);
+                }
                 this.point = null;
-                console.log("this.open: " + this.open);
+            },
+
+            openChanged: function(oldValue, newValue){
+                var n = this.$.content;
+                var offset = newValue ? this.offset - n.clientWidth : 0;
+                setTranslate(n, offset);
             },
 
             toggleOpen: function(){
