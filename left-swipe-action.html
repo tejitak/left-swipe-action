@@ -1,3 +1,22 @@
+<!--
+'left-swipe-action' enable a swipe gesture to open a content and show behind action buttons like iOS item list.
+
+    <left-swipe-action>
+        <div>
+            <div>Title</div>
+            <div>Description</div>
+        </div>
+        <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+        <left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
+    </left-swipe-action>
+
+The elements other than left-swipe-action-button will be inserted to shadow DOM as main content.
+'left-swipe-action-button' is a button to be fit with a content height. These are aligned as table cells.
+
+CSS for the main content and buttons in light DOM will be applied.
+
+@element left-swipe-action
+-->
 <link rel="import" href="left-swipe-action-button.html">
 
 <polymer-element name="left-swipe-action" attributes="open nodrag offset">
@@ -17,6 +36,7 @@
             }
 
             .swipe-content {
+                background-color: #fff;
                 -webkit-transform-style: preserve-3d;
                 -moz-transform-style: preserve-3d;
                 -ms-transform-style: preserve-3d;
@@ -46,21 +66,27 @@
     </template>
     <script>
 
+        /**
+         * Private class to have x-axis point and left flick status by checking a current and previous position
+         */
         var xPoint = function(x){
             this.updated = false;
             this.x = this._prev = this._origin = x;
             this._timeStamp = (new Date()).getTime();
         };
+
         xPoint.prototype = {
-            MIN_VELOCITY: -0.5 /* px/ms */,
+            TIMER_RESET_THRESHOLD: -5/* px */,
+            VELOCITY_THRESHOLD: -0.5 /* px/ms */,
 
             distance: function(){
+                // distance between touch start and current point
                 return this.x - this._origin;
             },
 
             update: function(x){
                 // reset time stamp at move stop
-                if(x - this.x > -5){
+                if(x - this.x > this.TIMER_RESET_THRESHOLD){
                     this._timeStamp = (new Date()).getTime();
                     this._prev = this.x;
                 }
@@ -71,11 +97,13 @@
             isFlick: function(){
                 var dt = (new Date()).getTime() - this._timeStamp;
                 var dx = this.x - this._prev;
-                var v = dx / dt;
-                return v < this.MIN_VELOCITY;
+                return (dx / dt) < this.VELOCITY_THRESHOLD;
             }
         };
 
+        /**
+         * Utility
+         */
         var util = {
             applyTransform: function(n, move){
                 var value = "translate3d(" + move + "px, 0, 0)";
@@ -85,11 +113,11 @@
                 n.style.OTransform = value;
                 n.style.transform = value;
             }
-        }; 
+        };
 
         Polymer({
             /**
-             * If true, the content is opened.
+             * If true, the content will be opened by default
              *
              * @attribute open
              * @type boolean
@@ -98,7 +126,7 @@
             open: false,
 
             /**
-             * If true, drag is disabled and a content is moved by click
+             * If true, drag (touch move) action is disabled and a content is automatically opened by click/touch
              *
              * @attribute nodrag
              * @type boolean
@@ -107,7 +135,7 @@
             nodrag: false,
 
             /**
-             * offset pixcel position for opened state
+             * Offset pixcel position for opened state
              *
              * @attribute offset
              * @type number
@@ -116,13 +144,14 @@
             offset: 60,
 
             ready: function(){
+                var n = this.$.content;
                 if(this.nodrag){
-                    this.$.content.addEventListener("pointerup", this.toggleOpen.bind(this));
+                    n.addEventListener("pointerup", this.toggleOpen.bind(this));
                 }else{
-                    this.$.content.addEventListener("pointerdown", this.onDown.bind(this));
-                    this.$.content.addEventListener("pointermove", this.onMove.bind(this));
-                    this.$.content.addEventListener("pointerup", this.onUp.bind(this));
-                    this.$.content.addEventListener("pointerout", this.onUp.bind(this));
+                    n.addEventListener("pointerdown", this.onDown.bind(this));
+                    n.addEventListener("pointermove", this.onMove.bind(this));
+                    n.addEventListener("pointerup", this.onUp.bind(this));
+                    n.addEventListener("pointerout", this.onUp.bind(this));
                 }
                 this.transition();
             },
@@ -132,17 +161,19 @@
             },
 
             onMove: function(e){
-                if(this.point){
-                    this.point.update(e.clientX);
-                    util.applyTransform(this.$.content, this.open ? this.offset - this.$.content.clientWidth + this.point.distance() : this.point.distance());
+                var p = this.point;
+                if(p){
+                    p.update(e.clientX);
+                    util.applyTransform(this.$.content, this.open ? this.offset - this.$.content.clientWidth + p.distance() : p.distance());
                 }
             },
 
             onUp: function(e){
-                if(!this.point){ return; }
-                this.open = this.point && this.point.isFlick();
+                var p = this.point;
+                if(!p){ return; }
+                this.open = p && p.isFlick();
                 this.point = null;
-                // apply css fixed-true first
+                // apply css fixed-true before transition
                 this.async(this.transition);
             },
 
