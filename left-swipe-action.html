@@ -18,10 +18,11 @@ The elements other than left-swipe-action-button will be inserted to shadow DOM 
 CSS for both the main content and buttons in light DOM will be just applied.
 
 @element left-swipe-action
+@auther tejitak
 -->
 <link rel="import" href="left-swipe-action-button.html">
 
-<polymer-element name="left-swipe-action" attributes="open nodrag offset">
+<polymer-element name="left-swipe-action" attributes="open nodrag offset shadow">
     <template>
         <style>
             :host {
@@ -60,11 +61,17 @@ CSS for both the main content and buttons in light DOM will be just applied.
                 -o-transition: -o-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
                 transition: transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
             }
+
+            .shadow-true {
+                -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+                -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+            }
         </style>
         <div class="swipe-underlay" layout horizontal reverse>
             <content select="left-swipe-action-button"></content>
         </div>
-        <div id="content" class="swipe-content fixed-{{!point.updated}} open-{{open}}">
+        <div id="content" class="swipe-content fixed-{{!point.updated}} open-{{open}} shadow-{{shadow}}">
             <content></content>
         </div>
     </template>
@@ -146,6 +153,15 @@ CSS for both the main content and buttons in light DOM will be just applied.
              * @default 60
              */
             offset: 60,
+
+             /**
+             * If true, box shadow is added
+             *
+             * @attribute shadow
+             * @type boolean
+             * @default false
+             */
+            shadow: false,
 
             ready: function(){
                 var n = this.$.content;
