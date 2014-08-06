@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Demo of left-swipe-action with Polymer</title>
+    <title>Polymer Web Component "left-swipe-action" Demo</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <script src="bower_components/platform/platform.js"></script>
     <script src="bower_components/pointerevents-polyfill/pointerevents.min.js"></script>
@@ -44,6 +44,18 @@
                 width: 400px;
             }
         }
+        .code_elem {
+            color: rgb(159, 73, 155);
+        }
+
+        .code_attr {
+            color: rgb(107, 73, 159);
+        }
+
+        .code_attr_val {
+            color: rgb(121, 134, 203);
+        }
+
         .github {
             color: #666;
             line-height: initial;
@@ -93,175 +105,189 @@
     </style>
 </head>
 <body unresolved>
-        <div class="header">
-            <div style="padding: 20px;">&lt;left-swipe-action&gt;</div>
-        </div>
-        <div class="container">
-            <div style="margin-bottom: 8px;">The polymer web component <strong>&lt;left-swipe-action&gt;</strong> enables a left swipe gesture to open a content and show behind action buttons like iOS item list.</div>
-            <div style="margin-bottom: 8px;"><strong>Try to swipe the code!</strong></div>
+    <div class="header">
+        <div style="padding: 20px;">&lt;left-swipe-action&gt;</div>
+    </div>
+    <div class="container">
+        <div>The polymer web component <strong>&lt;left-swipe-action&gt;</strong> enables a left swipe gesture to open a content and show behind action buttons like iOS item list.</div>
+        <div style="margin: 16px 0; text-align: center;"><strong>Try to swipe the code!</strong></div>
+        <left-swipe-action touch-action="pan-y" shadow>
+            <div style="padding: 8px;">
+<pre style="margin: 0;"><code><span class="code_elem">&lt;<strong>left-swipe-action</strong></span>
+    <span class="code_attr">touch-action</span><span class="code_attr_val">=&quot;pan-y&quot;</span><span class="code_elem">&gt;</span>
+    <span class="code_elem">&lt;div&gt;</span>
+    <span class="code_attr_val">Your content (Swipe me to left)</span>
+    <span class="code_elem">&lt;/div&gt;</span>
+    <span class="code_elem">&lt;<strong>left-swipe-action-button&gt;</strong></span>
+    <span class="code_attr_val">strongYour action</span>
+    <span class="code_elem">&lt;/<strong>left-swipe-action-button</strong>&gt;
+&lt;/<strong>left-swipe-action</strong>&gt;</span></code></pre>
+            </div>
+            <left-swipe-action-button>
+                <a href="https://github.com/tejitak/left-swipe-action" target="_blank">
+                <paper-button label="View on Github" icon="launch" class="github" role="button" tabindex="0" aria-label="View on Github"></paper-button>
+                </a>
+            </left-swipe-action-button>
+        </left-swipe-action>
+        <div style="line-height: 10px; widht: 100%; margin: 20px; text-align: center;">
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=556655494444828&version=v2.0";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+            <div class="fb-like" data-href="http://tejitak.github.io/left-swipe-action/demo.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            <a href="http://b.hatena.ne.jp/entry/http://localhost/study/left-swipe-action/demo.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Polymer Web Component &quot;left-swipe-action&quot; Demo" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tejitak.github.io/left-swipe-action/demo.html" data-via="" data-lang="en">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </div>
+    </div>
+    <!-- Basic Demo -->
+    <div id="basic">
+        <div class="separator"></div>
+        <h3>Simple</h3>
+        <div>
             <left-swipe-action touch-action="pan-y" shadow>
-                <div style="padding: 8px;">
-<pre style="margin: 0;"><code>&lt;left-swipe-action
-    touch-action=&quot;pan-y&quot;&gt;
-  &lt;div&gt;
-    Your content to be swiped
-  &lt;/div&gt;
-  &lt;left-swipe-action-button&gt;
-    Your action
-  &lt;/left-swipe-action-button&gt;
-&lt;/left-swipe-action&gt;</code></pre>
+                <div style="padding: 18px;">
+                    <div>My first Polymer project</div>
+                    <div><strong>Swipe me to left</strong></div>
+                    <div style="color: #abafb8; font-size: 12px">created by <a href="https://twitter.com/tejitak" target="_blank">@tejitak</a></div>
                 </div>
-                <left-swipe-action-button>
-                    <a href="https://github.com/tejitak/left-swipe-action" target="_blank">
-                    <paper-button label="View on Github" icon="launch" class="github" role="button" tabindex="0" aria-label="View on Github"></paper-button>
-                    </a>
-                </left-swipe-action-button>
+                <left-swipe-action-button style="background-color: #E81D62; color: #fff" onclick="alert('delete')">Delete</left-swipe-action-button>
             </left-swipe-action>
         </div>
-        <!-- Basic Demo -->
-        <div id="basic">
-            <div class="separator"></div>
-            <h3>Simple</h3>
-            <div>
-                <left-swipe-action touch-action="pan-y" shadow>
-                    <div style="padding: 18px;">
-                        <div>My first Polymer project</div>
-                        <div><strong>Swipe me to left</strong></div>
-                        <div style="color: #abafb8; font-size: 12px">created by <a href="https://twitter.com/tejitak" target="_blank">@tejitak</a></div>
-                    </div>
-                    <left-swipe-action-button style="background-color: #E81D62; color: #fff" onclick="alert('delete')">Delete</left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <div class="separator"></div>
-            <h2>Style customization example</h2>
-            <h3>Fixed height</h3>
-            <div>
-                <left-swipe-action touch-action="pan-y" shadow>
-                    <div  style="padding: 18px; height: 80px;">
-                        <div>Fixed height</div>
-                        <div><strong>Swipe me to left</strong></div>
-                        <div style="color: #abafb8; font-size: 12px">created with Polymer</div>
-                    </div>
-                    <left-swipe-action-button style="background-color: #E81D62; color: #fff" onclick="alert('delete')">Delete</left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <h3>Icon action</h3>
-            <div>
-                <left-swipe-action touch-action="pan-y" shadow>
-                    <div>
-                        <core-icon icon="arrow-back" style="margin: 30px;"></core-icon>
-                    </div>
-                    <left-swipe-action-button onclick="alert('favorite')"><paper-fab icon="favorite"></paper-fab></left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <h3>Flat (no shadow attribute)</h3>
-            <div>
-                <left-swipe-action touch-action="pan-y">
-                    <div>
-                        <core-icon icon="arrow-back" style="margin: 30px;"></core-icon>
-                    </div>
-                    <left-swipe-action-button onclick="alert('favorite')"><paper-fab icon="favorite"></paper-fab></left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <h3>Background-color</h3>
-            <div>
-                <left-swipe-action touch-action="pan-y">
-                    <div style="padding: 18px; color: #fff; background-color: #5264ae;">
-                        <p>Specify your favorite color<br><strong>Swipe me to left</strong></p>
-                    </div>
-                    <left-swipe-action-button onclick="alert('delete')"><paper-fab icon="delete"></paper-fab></left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <h3>Background-color for underlay</h3>
-            <div>
-                <left-swipe-action id="underlay_background" touch-action="pan-y" style="background-color: #fad920;">
-                    <div style="padding: 18px; color: #101010;">
-                        <p>Specify your favorite color<br><strong>Swipe me to left</strong></p>
-                    </div>
-                    <left-swipe-action-button onclick="alert('done')"><paper-fab icon="done"></paper-fab></left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <h3>Multi actions</h3>
-            <div>
-                <left-swipe-action touch-action="pan-y">
-                    <div  style="padding: 18px;">
-                        <p><strong>Swipe me to left</strong></p>
-                    </div>
-                    <left-swipe-action-button style="background-color: #E81D62;" onclick="alert('delete')">Delete</left-swipe-action-button>
-                    <left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <h3>Multi actions with icons</h3>
-            <div>
-                <left-swipe-action touch-action="pan-y" shadow>
-                    <div  style="padding: 18px;">
-                        <p>See how many actions are behind<br><strong>Swipe me to left</strong></p>
-                    </div>
-                    <left-swipe-action-button onclick="alert('delete')"><paper-fab icon="delete"></paper-fab></left-swipe-action-button>
-                    <left-swipe-action-button onclick="alert('star')"><paper-fab icon="star"></paper-fab></left-swipe-action-button>
-                    <left-swipe-action-button onclick="alert('schedule')"><paper-fab icon="schedule"></paper-fab></left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <h3>Within container</h3>
-            <div style="width: 80%; margin: 20px auto;">
-                <left-swipe-action touch-action="pan-y">
-                    <div>
-                        <div><strong>Swipe me to left</strong></div>
-                        <div style="color: #abafb8; font-size: 12px">more info</div>
-                    </div>
-                    <left-swipe-action-button onclick="alert('cloud-download')"><paper-button class="mini" icon="cloud-download" label=""></paper-button></left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <div class="separator"></div>
-            <h2>Attributes customization example</h2>
-            <h3>Open state (add an attribute "open")</h3>
-            <div>
-                <left-swipe-action touch-action="pan-y" open shadow>
-                    <div style="padding: 18px;">
-                        <p><strong>I'm opened by default</strong></p>
-                    </div>
-                    <left-swipe-action-button onclick="alert('delete')"><paper-fab icon="delete"></paper-fab></left-swipe-action-button>
-                    <left-swipe-action-button onclick="alert('star')"><paper-fab icon="star"></paper-fab></left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <h3>Disable drag/trouch move (add an attribute "nodrag")</h3>
-            <div>
-                <left-swipe-action touch-action="pan-y" nodrag shadow>
-                    <div style="padding: 8px;">
-                        <p><strong>Click/Tap me instead of swipe</strong></p>
-                    </div>
-                    <left-swipe-action-button onclick="alert('cloud-download')"><paper-fab icon="cloud-download"></paper-fab></left-swipe-action-button>
-                </left-swipe-action>
-            </div>
-            <h3>Offset for opened states (add an attribute offset="280")</h3>
-            <div>
-                <left-swipe-action touch-action="pan-y" offset="240" shadow>
-                    <div style="padding: 8px;">
-                        <p><strong>See the difference for the opened state</strong></p>
-                    </div>
-                    <left-swipe-action-button style="background-color: #E81D62;" onclick="alert('delete')">Delete</left-swipe-action-button>
-                </left-swipe-action>
-            </div>
+        <div class="separator"></div>
+        <h2>Style customization example</h2>
+        <h3>Fixed height</h3>
+        <div>
+            <left-swipe-action touch-action="pan-y" shadow>
+                <div  style="padding: 18px; height: 80px;">
+                    <div>Fixed height</div>
+                    <div><strong>Swipe me to left</strong></div>
+                    <div style="color: #abafb8; font-size: 12px">created with Polymer</div>
+                </div>
+                <left-swipe-action-button style="background-color: #E81D62; color: #fff" onclick="alert('delete')">Delete</left-swipe-action-button>
+            </left-swipe-action>
         </div>
-        <!-- List example -->
-        <div id="list_example">
-            <div class="separator"></div>
-            <h2>List example</h2>
-            <template is="auto-binding">
-                <template repeat="{{[1,2,3,4,5]}}">
-                <left-swipe-action touch-action="pan-y" shadow offset="40">
-                    <div class="list-container">
-                        <div class="list-thumb"><paper-icon-button icon="social:person"></paper-icon-button></div>
-                        <div class="list-content">
-                            <div class="list-message">Tejitak</div>
-                            <div class="list-info">Repated by &lt;template repeat&gt; ...</div>
-                        </div>
+        <h3>Icon action</h3>
+        <div>
+            <left-swipe-action touch-action="pan-y" shadow>
+                <div>
+                    <core-icon icon="arrow-back" style="margin: 30px;"></core-icon>
+                </div>
+                <left-swipe-action-button onclick="alert('favorite')"><paper-fab icon="favorite"></paper-fab></left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <h3>Flat (no shadow attribute)</h3>
+        <div>
+            <left-swipe-action touch-action="pan-y">
+                <div>
+                    <core-icon icon="arrow-back" style="margin: 30px;"></core-icon>
+                </div>
+                <left-swipe-action-button onclick="alert('favorite')"><paper-fab icon="favorite"></paper-fab></left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <h3>Background-color</h3>
+        <div>
+            <left-swipe-action touch-action="pan-y">
+                <div style="padding: 18px; color: #fff; background-color: #5264ae;">
+                    <p>Specify your favorite color<br><strong>Swipe me to left</strong></p>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')"><paper-fab icon="delete"></paper-fab></left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <h3>Background-color for underlay</h3>
+        <div>
+            <left-swipe-action id="underlay_background" touch-action="pan-y" style="background-color: #fad920;">
+                <div style="padding: 18px; color: #101010;">
+                    <p>Specify your favorite color<br><strong>Swipe me to left</strong></p>
+                </div>
+                <left-swipe-action-button onclick="alert('done')"><paper-fab icon="done"></paper-fab></left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <h3>Multi actions</h3>
+        <div>
+            <left-swipe-action touch-action="pan-y">
+                <div  style="padding: 18px;">
+                    <p><strong>Swipe me to left</strong></p>
+                </div>
+                <left-swipe-action-button style="background-color: #E81D62;" onclick="alert('delete')">Delete</left-swipe-action-button>
+                <left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <h3>Multi actions with icons</h3>
+        <div>
+            <left-swipe-action touch-action="pan-y" shadow>
+                <div  style="padding: 18px;">
+                    <p>See how many actions are behind<br><strong>Swipe me to left</strong></p>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')"><paper-fab icon="delete"></paper-fab></left-swipe-action-button>
+                <left-swipe-action-button onclick="alert('star')"><paper-fab icon="star"></paper-fab></left-swipe-action-button>
+                <left-swipe-action-button onclick="alert('schedule')"><paper-fab icon="schedule"></paper-fab></left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <h3>Within container</h3>
+        <div style="width: 80%; margin: 20px auto;">
+            <left-swipe-action touch-action="pan-y">
+                <div>
+                    <div><strong>Swipe me to left</strong></div>
+                    <div style="color: #abafb8; font-size: 12px">more info</div>
+                </div>
+                <left-swipe-action-button onclick="alert('cloud-download')"><paper-button class="mini" icon="cloud-download" label=""></paper-button></left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <div class="separator"></div>
+        <h2>Attributes customization example</h2>
+        <h3>Open state (add an attribute "open")</h3>
+        <div>
+            <left-swipe-action touch-action="pan-y" open shadow>
+                <div style="padding: 18px;">
+                    <p><strong>I'm opened by default</strong></p>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')"><paper-fab icon="delete"></paper-fab></left-swipe-action-button>
+                <left-swipe-action-button onclick="alert('star')"><paper-fab icon="star"></paper-fab></left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <h3>Disable drag/trouch move (add an attribute "nodrag")</h3>
+        <div>
+            <left-swipe-action touch-action="pan-y" nodrag shadow>
+                <div style="padding: 8px;">
+                    <p><strong>Click/Tap me instead of swipe</strong></p>
+                </div>
+                <left-swipe-action-button onclick="alert('cloud-download')"><paper-fab icon="cloud-download"></paper-fab></left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+        <h3>Offset for opened states (add an attribute offset="280")</h3>
+        <div>
+            <left-swipe-action touch-action="pan-y" offset="240" shadow>
+                <div style="padding: 8px;">
+                    <p><strong>See the difference for the opened state</strong></p>
+                </div>
+                <left-swipe-action-button style="background-color: #E81D62;" onclick="alert('delete')">Delete</left-swipe-action-button>
+            </left-swipe-action>
+        </div>
+    </div>
+    <!-- List example -->
+    <div id="list_example">
+        <div class="separator"></div>
+        <h2>List example</h2>
+        <template is="auto-binding">
+            <template repeat="{{[1,2,3,4,5]}}">
+            <left-swipe-action touch-action="pan-y" shadow offset="40">
+                <div class="list-container">
+                    <div class="list-thumb"><paper-icon-button icon="social:person"></paper-icon-button></div>
+                    <div class="list-content">
+                        <div class="list-message">Tejitak</div>
+                        <div class="list-info">Repeated by &lt;template repeat&gt; ...</div>
                     </div>
-                    <left-swipe-action-button onclick="alert('delete')"><paper-fab icon="delete"></paper-fab></left-swipe-action-button>
-                    <left-swipe-action-button onclick="alert('star')"><paper-fab icon="star"></paper-fab></left-swipe-action-button>
-                    <left-swipe-action-button onclick="alert('schedule')"><paper-fab icon="schedule"></paper-fab></left-swipe-action-button>
-                </left-swipe-action>
+                </div>
+                <left-swipe-action-button onclick="alert('delete')"><paper-fab icon="delete"></paper-fab></left-swipe-action-button>
+                <left-swipe-action-button onclick="alert('star')"><paper-fab icon="star"></paper-fab></left-swipe-action-button>
+                <left-swipe-action-button onclick="alert('schedule')"><paper-fab icon="schedule"></paper-fab></left-swipe-action-button>
+            </left-swipe-action>
             </template>
         </template>
-        </div>
+    </div>
 </body>
