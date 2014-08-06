@@ -38,7 +38,7 @@
         }
         .social_container {
             width: 100%;
-            margin: 0px auto 50px auto;
+            margin: 0 auto;
         }
         @media (min-width: 481px) {
             #tabs {
@@ -116,17 +116,16 @@
         <div>The <a href="http://www.polymer-project.org/">polymer</a> web component <strong>&lt;left-swipe-action&gt;</strong> enables a left swipe gesture to open a content and show behind action buttons like iOS item list.</div>
         <div style="margin: 16px 0; text-align: center;"><strong>Try to swipe to view on github!</strong></div>
         <left-swipe-action touch-action="pan-y" shadow>
-            <div style="padding: 8px;">
-<pre style="margin: 0;"><code><span class="code_elem">&lt;<strong>left-swipe-action</strong></span>
-    <span class="code_attr">touch-action</span><span class="code_attr_val">=&quot;pan-y&quot;</span><span class="code_elem">&gt;</span>
-    <span class="code_elem">&lt;div&gt;</span>
-    <span class="code_attr_val">Your content to be swiped</span>
-    <span class="code_elem">&lt;/div&gt;</span>
-    <span class="code_elem">&lt;<strong>left-swipe-action-button&gt;</strong></span>
-    <span class="code_attr_val">strongYour action</span>
-    <span class="code_elem">&lt;/<strong>left-swipe-action-button</strong>&gt;
-&lt;/<strong>left-swipe-action</strong>&gt;</span></code></pre>
-            </div>
+            <div style="padding: 8px; margin: 0 auto;">
+                <code><span class="code_elem">&lt;<strong>left-swipe-action</strong></span>&nbsp;<span class="code_attr">touch-action</span><span class="code_attr_val">=&quot;pan-y&quot;</span><span class="code_elem">&gt;</span><br>
+                &nbsp;&nbsp;<span class="code_elem">&lt;div&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code_attr_val">Your content to be swiped</span><br>
+                &nbsp;&nbsp;<span class="code_elem">&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;<span class="code_elem">&lt;<strong>left-swipe-action-button&gt;</strong></span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code_attr_val">Your action</span><br>
+                &nbsp;&nbsp;<span class="code_elem">&lt;/<strong>left-swipe-action-button</strong>&gt;<br>
+                &lt;/<strong>left-swipe-action</strong>&gt;</span></code>
+                            </div>
             <left-swipe-action-button>
                 <a href="https://github.com/tejitak/left-swipe-action" target="_blank">
                 <paper-button label="View on Github" icon="launch" class="github" role="button" tabindex="0" aria-label="View on Github"></paper-button>
@@ -135,19 +134,25 @@
         </left-swipe-action>
     </div>
     <div class="social_container">
-        <div style="line-height: 10px; widht: 100%; margin: 20px 0; text-align: center;">
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=556655494444828&version=v2.0";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-            <div class="fb-like" data-href="http://tejitak.github.io/left-swipe-action/demo.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-            <a href="http://b.hatena.ne.jp/entry/http://tejitak.github.io/left-swipe-action/demo.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Polymer Web Component &quot;left-swipe-action&quot; Demo" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tejitak.github.io/left-swipe-action/demo.html" data-via="" data-lang="en">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <div style="line-height: 10px; display: table; margin: 30px auto; text-align: center; width: 300px; padding-left: 20px;">
+            <div style="display: table-cell;">
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=556655494444828&version=v2.0";
+                  fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+                <div class="fb-like" data-href="http://tejitak.github.io/left-swipe-action/demo.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            </div>
+            <div style="display: table-cell;">
+                <a href="http://b.hatena.ne.jp/entry/http://tejitak.github.io/left-swipe-action/demo.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Polymer Web Component &quot;left-swipe-action&quot; Demo" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+            </div>
+            <div style="display: table-cell;">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tejitak.github.io/left-swipe-action/demo.html" data-via="" data-lang="en">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
     </div>
     </div>
     <!-- Basic Demo -->
