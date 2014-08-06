@@ -171,7 +171,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
                     n.addEventListener("pointerdown", this.onDown.bind(this));
                     n.addEventListener("pointermove", this.onMove.bind(this));
                     n.addEventListener("pointerup", this.onUp.bind(this));
-                    n.addEventListener("pointerout", this.onUp.bind(this));
+                    n.addEventListener("pointerout", this.onOut.bind(this));
                 }
                 this.transition();
             },
@@ -195,6 +195,27 @@ CSS for both the main content and buttons in light DOM will be just applied.
                 this.point = null;
                 // apply css fixed-true before transition
                 this.async(this.transition);
+            },
+
+            onOut: function(e){
+                if(this.isLeave(e)){
+                    this.onUp(e);
+                }
+            },
+
+            isLeave: function(e){
+                var t = e.toElement || e.target, f = e.fromElement || e.relatedTarget;
+                if(!t || !f || !f.parentNode){ return true; }
+                // if the nested order from inner to outer is to -> this -> from (including sibling) it woud be leave
+                // TODO: n is not match with this in iOS safari and android chrome. It sohuld be replaced with pointerleave in future?
+                var isDescendantOfThis = function(n){
+                    while(n){
+                        if(n.localName == "left-swipe-action"){ return true; }
+                        n = n.parentNode;
+                    }
+                    return false;
+                };
+                return isDescendantOfThis(t) && !isDescendantOfThis(f);
             },
 
             transition: function(){
