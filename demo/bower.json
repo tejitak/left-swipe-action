@@ -1,0 +1,12 @@
+{
+  "name": "left-swipe-action-demo",
+  "version": "0.0.0",
+  "homepage": "https://github.com/tejitak/left-swipe-action",
+  "authors": [
+    "tejitak <tejitak@hotmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "paper-elements": "Polymer/paper-elements#~0.3.4"
+  }
+}

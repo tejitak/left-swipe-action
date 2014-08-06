@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Poylmer example: left-swipe-action</title>
+    <title>Polymer example: left-swipe-action</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <script src="bower_components/platform/platform.js"></script>
     <script src="bower_components/pointerevents-polyfill/pointerevents.min.js"></script>
@@ -14,11 +14,6 @@
             margin: 0;
             background-color: #E5E5E5;
         }
-
-        .container {
-            width: 80%;
-            margin: 50px auto;
-        }
     </style>
 </head>
 <body unresolved touch-action="auto">
@@ -28,7 +23,7 @@
                 <div>Title</div>
                 <div>Description</div>
             </div>
-            <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+            <left-swipe-action-button style="background-color: #E81D62;" onclick="alert('delete')">Delete</left-swipe-action-button>
             <left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
         </left-swipe-action>
     </div>
