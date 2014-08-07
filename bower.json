@@ -1,12 +1,21 @@
 {
   "name": "left-swipe-action",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "authors": [
-    "tejitak <tejitak@hotmail.com>"
+    "tejitak"
+  ],
+  "description": "Left swipe action with Polymer web components",
+  "keywords": [
+    "Polymer",
+    "web-components"
   ],
   "license": "MIT",
+  "homepage": "https://github.com/tejitak/left-swipe-action",
   "dependencies": {
     "polymer": "Polymer/polymer#~0.3.4",
     "pointerevents-polyfill": "~0.2.0"
-  }
+  },
+  "ignore": [
+    "**/.*"
+  ]
 }
