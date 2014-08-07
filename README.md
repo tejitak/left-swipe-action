@@ -134,10 +134,10 @@ This can be worked with Polymer &lt;template repeat&gt; or other MVC library ([A
 <script src="bower_components/platform/platform.js"></script>
 <script src="bower_components/pointerevents-polyfill/pointerevents.min.js"></script>
 <link rel="import" href="bower_components/polymer/polymer.html">
-<link rel="import" href="bower_components/polymer-left-swipe-action/left-swipe-action.html">
+<link rel="import" href="bower_components/left-swipe-action/left-swipe-action.html">
 ```
 
-3. Markup with <left-swipe-action></left-swipe-action>
+3. Markup with &lt;left-swipe-action&gt;
 
 4. Done
 
