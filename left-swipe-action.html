@@ -3,7 +3,7 @@
 
 This component wraps your own element and the wrapper handles gesture events. The main content will be opened by a left swipe and specified buttons 'left-swipe-action-button' will be shown behind of the content. The other gestures on the component will close the content.
 
-    <left-swipe-action touch-action="pan-y">
+    <left-swipe-action>
         <div>
             <div>Title</div>
             <div>Description</div>
@@ -71,7 +71,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
         <div class="swipe-underlay" layout horizontal reverse>
             <content select="left-swipe-action-button"></content>
         </div>
-        <div id="content" class="swipe-content fixed-{{!point.updated}} open-{{open}} shadow-{{shadow}}">
+        <div id="content" class="swipe-content fixed-{{!point.updated}} open-{{open}} shadow-{{shadow}}" touch-action="pan-y">
             <content></content>
         </div>
     </template>
@@ -88,7 +88,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
 
         xPoint.prototype = {
             TIMER_RESET_THRESHOLD: -5/* px */,
-            VELOCITY_THRESHOLD: -0.5 /* px/ms */,
+            VELOCITY_THRESHOLD: -0.2 /* px/ms */,
 
             distance: function(){
                 // distance between touch start and current point
@@ -166,12 +166,12 @@ CSS for both the main content and buttons in light DOM will be just applied.
             ready: function(){
                 var n = this.$.content;
                 if(this.nodrag){
-                    n.addEventListener("pointerup", this.toggleOpen.bind(this));
+                    PolymerGestures.addEventListener(n, "up", this.toggleOpen.bind(this));
                 }else{
-                    n.addEventListener("pointerdown", this.onDown.bind(this));
-                    n.addEventListener("pointermove", this.onMove.bind(this));
-                    n.addEventListener("pointerup", this.onUp.bind(this));
-                    n.addEventListener("pointerout", this.onOut.bind(this));
+                    PolymerGestures.addEventListener(n, "down", this.onDown.bind(this));
+                    PolymerGestures.addEventListener(n, "track", this.onMove.bind(this));
+                    PolymerGestures.addEventListener(n, "up", this.onUp.bind(this));
+                    PolymerGestures.addEventListener(n, "mouseleave", this.onUp.bind(this));
                 }
                 this.transition();
             },
@@ -195,27 +195,6 @@ CSS for both the main content and buttons in light DOM will be just applied.
                 this.point = null;
                 // apply css fixed-true before transition
                 this.async(this.transition);
-            },
-
-            onOut: function(e){
-                if(this.isLeave(e)){
-                    this.onUp(e);
-                }
-            },
-
-            isLeave: function(e){
-                var t = e.toElement || e.target, f = e.fromElement || e.relatedTarget;
-                if(!t || !f || !f.parentNode){ return true; }
-                // if the nested order from inner to outer is to -> this -> from (including sibling) it woud be leave
-                // TODO: n is not match with this in iOS safari and android chrome. It sohuld be replaced with pointerleave in future?
-                var isDescendantOfThis = function(n){
-                    while(n){
-                        if(n.localName == "left-swipe-action"){ return true; }
-                        n = n.parentNode;
-                    }
-                    return false;
-                };
-                return isDescendantOfThis(t) && !isDescendantOfThis(f);
             },
 
             transition: function(){
