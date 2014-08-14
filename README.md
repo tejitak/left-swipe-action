@@ -7,7 +7,7 @@
 This component wraps your own element and the wrapper handles gesture events. The main content will be opened by a left swipe and specified buttons &lt;left-swipe-action-button&gt; will be shown behind of the content. The other gestures on the component will close the content.
 
 ```html
-<left-swipe-action touch-action="pan-y">
+<left-swipe-action>
     <div>
         <!-- 
           Your content to be swiped here
@@ -41,7 +41,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
 
 ### Simple example
 ```html
-<left-swipe-action touch-action="pan-y" shadow>
+<left-swipe-action shadow>
     <div style="padding: 18px;">
         <div>My first Polymer project</div>
         <div><strong>Swipe me to left</strong></div>
@@ -52,7 +52,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
 
 ### Multi actions example with paper elements
 ```html
-<left-swipe-action touch-action="pan-y" shadow>
+<left-swipe-action shadow>
     <div  style="padding: 18px;">
         <p>See how many actions are behind<br><strong>Swipe me to left</strong></p>
     </div>
@@ -61,15 +61,13 @@ CSS for both the main content and buttons in light DOM will be just applied.
 </left-swipe-action>
 ```
 
-The attribute touch-action="pan-y" is used by [Polymer/PointerEvents](https://github.com/Polymer/PointerEvents).
-
 This can be worked with Polymer &lt;template repeat&gt; or other MVC library ([Angular.js](https://angularjs.org/), [Vue.js](http://vuejs.org/) etc.) like the following.
 
 #### Template repeat example
 
 ```html
 <template repeat="{{[1,2,3,4,5]}}">
-  <left-swipe-action touch-action="pan-y" shadow offset="40">
+  <left-swipe-action shadow offset="40">
       <div class="list-container">
           <div class="list-thumb"><a href="https://twitter.com/tejitak" target="_blank"><paper-icon-button icon="social:person"></paper-icon-button></a></div>
           <div class="list-content">
@@ -132,7 +130,6 @@ This can be worked with Polymer &lt;template repeat&gt; or other MVC library ([A
 
 ```html
 <script src="bower_components/platform/platform.js"></script>
-<script src="bower_components/pointerevents-polyfill/pointerevents.min.js"></script>
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/left-swipe-action/left-swipe-action.html">
 ```

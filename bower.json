@@ -12,8 +12,7 @@
   "license": "MIT",
   "homepage": "https://github.com/tejitak/left-swipe-action",
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.3.4",
-    "pointerevents-polyfill": "~0.2.0"
+    "polymer": "Polymer/polymer#~0.3.5"
   },
   "ignore": [
     "**/.*"

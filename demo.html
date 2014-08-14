@@ -4,10 +4,9 @@
     <title>Polymer Web Component "left-swipe-action" Demo</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <script src="bower_components/platform/platform.js"></script>
-    <script src="bower_components/pointerevents-polyfill/pointerevents.min.js"></script>
     <link rel="import" href="demo/bower_components/font-roboto/roboto.html">
     <link rel="import" href="demo/bower_components/core-icons/core-icons.html">
-    <link rel="import" href="demo/bower_components/core-icons/iconsets/social-icons.html">
+    <link rel="import" href="demo/bower_components/core-icons/social-icons.html">
     <link rel="import" href="demo/bower_components/paper-icon-button/paper-icon-button.html">
     <link rel="import" href="demo/bower_components/paper-fab/paper-fab.html">
     <link rel="import" href="demo/bower_components/paper-button/paper-button.html">
@@ -115,9 +114,9 @@
     <div class="container">
         <div>The <a href="http://www.polymer-project.org/">polymer</a> web component <strong>&lt;left-swipe-action&gt;</strong> enables a left swipe gesture to open a content and show behind action buttons like iOS item list.</div>
         <div style="margin: 16px 0; text-align: center;"><strong>Try to swipe to view on github!</strong></div>
-        <left-swipe-action touch-action="pan-y" shadow>
+        <left-swipe-action shadow>
             <div style="padding: 8px; margin: 0 auto;">
-                <code><span class="code_elem">&lt;<strong>left-swipe-action</strong></span>&nbsp;<span class="code_attr">touch-action</span><span class="code_attr_val">=&quot;pan-y&quot;</span><span class="code_elem">&gt;</span><br>
+                <code><span class="code_elem">&lt;<strong>left-swipe-action</strong></span><span class="code_elem">&gt;</span><br>
                 &nbsp;&nbsp;<span class="code_elem">&lt;div&gt;</span><br>
                 &nbsp;&nbsp;&nbsp;&nbsp;<span class="code_attr_val">Your content to be swiped</span><br>
                 &nbsp;&nbsp;<span class="code_elem">&lt;/div&gt;</span><br>
@@ -160,7 +159,7 @@
         <div class="separator"></div>
         <h3>Simple</h3>
         <div>
-            <left-swipe-action touch-action="pan-y" shadow>
+            <left-swipe-action shadow>
                 <div style="padding: 18px;">
                     <div>My first Polymer project</div>
                     <div><strong>Swipe me to left</strong></div>
@@ -173,7 +172,7 @@
         <h2>Style customization example</h2>
         <h3>Fixed height</h3>
         <div>
-            <left-swipe-action touch-action="pan-y" shadow>
+            <left-swipe-action shadow>
                 <div  style="padding: 18px; height: 80px;">
                     <div>Fixed height</div>
                     <div><strong>Swipe me to left</strong></div>
@@ -184,7 +183,7 @@
         </div>
         <h3>Icon action</h3>
         <div>
-            <left-swipe-action touch-action="pan-y" shadow>
+            <left-swipe-action shadow>
                 <div>
                     <core-icon icon="arrow-back" style="margin: 30px;"></core-icon>
                 </div>
@@ -193,7 +192,7 @@
         </div>
         <h3>Flat (no shadow attribute)</h3>
         <div>
-            <left-swipe-action touch-action="pan-y">
+            <left-swipe-action>
                 <div>
                     <core-icon icon="arrow-back" style="margin: 30px;"></core-icon>
                 </div>
@@ -202,7 +201,7 @@
         </div>
         <h3>Background-color</h3>
         <div>
-            <left-swipe-action touch-action="pan-y">
+            <left-swipe-action>
                 <div style="padding: 18px; color: #fff; background-color: #5264ae;">
                     <p>Specify your favorite color<br><strong>Swipe me to left</strong></p>
                 </div>
@@ -211,7 +210,7 @@
         </div>
         <h3>Background-color for underlay</h3>
         <div>
-            <left-swipe-action id="underlay_background" touch-action="pan-y" style="background-color: #fad920;">
+            <left-swipe-action id="underlay_background" style="background-color: #fad920;">
                 <div style="padding: 18px; color: #101010;">
                     <p>Specify your favorite color<br><strong>Swipe me to left</strong></p>
                 </div>
@@ -220,7 +219,7 @@
         </div>
         <h3>Multi actions</h3>
         <div>
-            <left-swipe-action touch-action="pan-y">
+            <left-swipe-action>
                 <div  style="padding: 18px;">
                     <p><strong>Swipe me to left</strong></p>
                 </div>
@@ -230,7 +229,7 @@
         </div>
         <h3>Multi actions with icons</h3>
         <div>
-            <left-swipe-action touch-action="pan-y" shadow>
+            <left-swipe-action shadow>
                 <div  style="padding: 18px;">
                     <p>See how many actions are behind<br><strong>Swipe me to left</strong></p>
                 </div>
@@ -241,7 +240,7 @@
         </div>
         <h3>Within container</h3>
         <div style="width: 80%; margin: 20px auto;">
-            <left-swipe-action touch-action="pan-y">
+            <left-swipe-action>
                 <div>
                     <div><strong>Swipe me to left</strong></div>
                     <div style="color: #abafb8; font-size: 12px">more info</div>
@@ -253,7 +252,7 @@
         <h2>Attributes customization example</h2>
         <h3>Open state (add an attribute "open")</h3>
         <div>
-            <left-swipe-action touch-action="pan-y" open shadow>
+            <left-swipe-action open shadow>
                 <div style="padding: 18px;">
                     <p><strong>I'm opened by default</strong></p>
                 </div>
@@ -263,7 +262,7 @@
         </div>
         <h3>Disable drag/trouch move (add an attribute "nodrag")</h3>
         <div>
-            <left-swipe-action touch-action="pan-y" nodrag shadow>
+            <left-swipe-action nodrag shadow>
                 <div style="padding: 8px;">
                     <p><strong>Click/Tap me instead of swipe</strong></p>
                 </div>
@@ -272,7 +271,7 @@
         </div>
         <h3>Offset for opened states (add an attribute offset="280")</h3>
         <div>
-            <left-swipe-action touch-action="pan-y" offset="240" shadow>
+            <left-swipe-action offset="240" shadow>
                 <div style="padding: 8px;">
                     <p><strong>See the difference for the opened state</strong></p>
                 </div>
@@ -286,7 +285,7 @@
         <h2>List example</h2>
         <template is="auto-binding">
             <template repeat="{{[1,2,3,4,5]}}">
-            <left-swipe-action touch-action="pan-y" shadow offset="40">
+            <left-swipe-action shadow offset="40">
                 <div class="list-container">
                     <div class="list-thumb"><a href="https://twitter.com/tejitak" target="_blank"><paper-icon-button icon="social:person"></paper-icon-button></a></div>
                     <div class="list-content">
