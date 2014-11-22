@@ -129,7 +129,7 @@ This can be worked with Polymer &lt;template repeat&gt; or other MVC library ([A
 2. Load the web component and the dependencies
 
 ```html
-<script src="bower_components/platform/platform.js"></script>
+<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/left-swipe-action/left-swipe-action.html">
 ```
