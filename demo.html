@@ -40,10 +40,18 @@
             margin: 50px auto 20px auto
         }
         .social_container {
-            width: 100%;
+            width: 300px;
             margin: 0 auto;
+            text-align: center;
+        }
+        .social_container .social_item{
+            display: inline-block;
+            padding: 4px 20px
         }
         @media (min-width: 481px) {
+            .social_container {
+                width: 100%;
+            }
             #tabs {
                 width: 200px;
             }
@@ -143,29 +151,27 @@
         </left-swipe-action>
     </div>
     <div class="social_container">
-        <div style="line-height: 10px; display: table; margin: 30px auto; text-align: center; width: 300px; padding-left: 20px;">
-            <div style="display: table-cell;">
-                <div id="fb-root"></div>
-                <script>(function(d, s, id) {
-                  var js, fjs = d.getElementsByTagName(s)[0];
-                  if (d.getElementById(id)) return;
-                  js = d.createElement(s); js.id = id;
-                  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=556655494444828&version=v2.0";
-                  fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));</script>
-                <div class="fb-like" data-href="http://tejitak.github.io/left-swipe-action/demo.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-            </div>
-            <div style="display: table-cell; padding: 0 40px;">
-                <a href="http://b.hatena.ne.jp/entry/http://tejitak.github.io/left-swipe-action/demo.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Polymer Web Component &quot;left-swipe-action&quot; Demo" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-            </div>
-            <div style="display: table-cell;">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tejitak.github.io/left-swipe-action/demo.html" data-via="" data-lang="en">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            </div>
-            <div style="display: table-cell;">
-                <iframe src="http://ghbtns.com/github-btn.html?user=tejitak&repo=left-swipe-action&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="104px" height="20px"></iframe>
-            </div>
-    </div>
+        <div class="social_item">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tejitak.github.io/left-swipe-action/demo.html" data-via="" data-lang="en">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+        <div class="social_item">
+            <iframe src="http://ghbtns.com/github-btn.html?user=tejitak&repo=left-swipe-action&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="104px" height="20px"></iframe>
+        </div>
+        <div class="social_item">
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=556655494444828&version=v2.0";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+            <div class="fb-like" data-href="http://tejitak.github.io/left-swipe-action/demo.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+        </div>
+        <div class="social_item">
+            <a href="http://b.hatena.ne.jp/entry/http://tejitak.github.io/left-swipe-action/demo.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Polymer Web Component &quot;left-swipe-action&quot; Demo" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </div>
     </div>
     <!-- Basic Demo -->
     <div id="basic">
