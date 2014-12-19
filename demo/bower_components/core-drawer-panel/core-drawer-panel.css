@@ -24,7 +24,7 @@ core-selector > #drawer {
   height: 100%;
   will-change: transform;
   box-sizing: border-box;
-  -mox-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .transition > #drawer {

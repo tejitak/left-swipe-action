@@ -7,5 +7,5 @@
     "paper-progress": "Polymer/paper-progress#^0.5.0",
     "core-a11y-keys": "Polymer/core-a11y-keys#^0.5.0"
   },
-  "version": "0.5.1"
+  "version": "0.5.2"
 }

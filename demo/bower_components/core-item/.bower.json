@@ -5,13 +5,13 @@
     "core-icon": "Polymer/core-icon#^0.5.0",
     "core-icons": "Polymer/core-icons#^0.5.0"
   },
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "https://github.com/Polymer/core-item",
-  "_release": "0.5.1",
+  "_release": "0.5.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.5.1",
-    "commit": "7f556492c2af60acab43abc606de34be63f3ca31"
+    "tag": "0.5.2",
+    "commit": "029c112752103e03377a0ab3d79b64e982703ddf"
   },
   "_source": "git://github.com/Polymer/core-item.git",
   "_target": "^0.5.0",

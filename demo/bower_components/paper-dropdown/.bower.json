@@ -15,13 +15,13 @@
   "devDependencies": {
     "web-component-tester": "web-component-tester#master"
   },
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "https://github.com/Polymer/paper-dropdown",
-  "_release": "0.5.1",
+  "_release": "0.5.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.5.1",
-    "commit": "526240ca9a964da67146432539251ef13f537bf5"
+    "tag": "0.5.2",
+    "commit": "dcb105c817501ef360e6780ec0e67e8098fdb18e"
   },
   "_source": "git://github.com/Polymer/paper-dropdown.git",
   "_target": "^0.5.0",

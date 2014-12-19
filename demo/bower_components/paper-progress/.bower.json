@@ -5,13 +5,13 @@
     "core-range": "Polymer/core-range#^0.5.0",
     "paper-button": "Polymer/paper-button#^0.5.0"
   },
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "https://github.com/Polymer/paper-progress",
-  "_release": "0.5.1",
+  "_release": "0.5.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.5.1",
-    "commit": "0431a7e0034c5acaa2ede00580db343243383346"
+    "tag": "0.5.2",
+    "commit": "3dfcacf0695a23f8ab56c95f2dfa2597fc5595ab"
   },
   "_source": "git://github.com/Polymer/paper-progress.git",
   "_target": "^0.5.0",

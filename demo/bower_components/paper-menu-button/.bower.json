@@ -13,13 +13,13 @@
     "paper-icon-button": "Polymer/paper-icon-button#^0.5.0",
     "paper-item": "Polymer/paper-item#^0.5.0"
   },
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "https://github.com/Polymer/paper-menu-button",
-  "_release": "0.5.1",
+  "_release": "0.5.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.5.1",
-    "commit": "b8054d0aad333d41eceadf29c5d633a90b281195"
+    "tag": "0.5.2",
+    "commit": "4cea285c33f1c4c8100072634ff2212c1bff6a5b"
   },
   "_source": "git://github.com/Polymer/paper-menu-button.git",
   "_target": "^0.5.0",

@@ -9,5 +9,5 @@
     "core-menu": "Polymer/core-menu#^0.5.0",
     "core-toolbar": "Polymer/core-toolbar#^0.5.0"
   },
-  "version": "0.5.1"
+  "version": "0.5.2"
 }

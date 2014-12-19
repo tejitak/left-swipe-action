@@ -9,13 +9,13 @@
   "ignore": [
     "externs/**"
   ],
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "https://github.com/Polymer/paper-checkbox",
-  "_release": "0.5.1",
+  "_release": "0.5.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.5.1",
-    "commit": "c82e4cbd5b91afdedaba6a614d32fabb1b610621"
+    "tag": "0.5.2",
+    "commit": "30e2bc52da27df485dda516f7126d3047070f518"
   },
   "_source": "git://github.com/Polymer/paper-checkbox.git",
   "_target": "^0.5.0",
