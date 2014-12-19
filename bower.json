@@ -12,7 +12,7 @@
   "license": "MIT",
   "homepage": "https://github.com/tejitak/left-swipe-action",
   "dependencies": {
-    "polymer": "~0.5.1"
+    "polymer": "~0.5.2"
   },
   "ignore": [
     "**/.*"
