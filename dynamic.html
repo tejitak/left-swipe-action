@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
     <link rel="import" href="bower_components/polymer/polymer.html">
-    <link rel="import" href="left-swipe-action.html">
     <style>
         html, body {
             height: 100%;
@@ -16,7 +15,8 @@
 </head>
 <body>
     <div>
-        <left-swipe-action>
+        <button>Import</button>
+        <left-swipe-action style="display: none;">
             <div style="height: 120px;">
                 <div>Title</div>
                 <div>Description</div>
@@ -25,5 +25,14 @@
             <left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
         </left-swipe-action>
     </div>
+    <script>
+        // web components dynamic load
+        var button = document.querySelector('button');
+        button.addEventListener('click', function() {
+            Polymer.import(['left-swipe-action.html'], function(){
+                document.querySelector('left-swipe-action').style.display = 'block';
+            });
+        });
+    </script>
 </body>
 </html>
