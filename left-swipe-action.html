@@ -166,12 +166,12 @@ CSS for both the main content and buttons in light DOM will be just applied.
             ready: function(){
                 var n = this.$.content;
                 if(this.nodrag){
-                    PolymerGestures.addEventListener(n, "up", this.toggleOpen.bind(this));
+                    PolymerGestures.addEventListener(n, "up", this.toggleOpen);
                 }else{
-                    PolymerGestures.addEventListener(n, "down", this.onDown.bind(this));
-                    PolymerGestures.addEventListener(n, "track", this.onMove.bind(this));
-                    PolymerGestures.addEventListener(n, "up", this.onUp.bind(this));
-                    PolymerGestures.addEventListener(n, "mouseleave", this.onUp.bind(this));
+                    PolymerGestures.addEventListener(n, "down", this.onDown);
+                    PolymerGestures.addEventListener(n, "track", this.onMove);
+                    PolymerGestures.addEventListener(n, "up", this.onUp);
+                    PolymerGestures.addEventListener(n, "mouseleave", this.onUp);
                 }
                 this.transition();
             },
@@ -204,6 +204,23 @@ CSS for both the main content and buttons in light DOM will be just applied.
             toggleOpen: function(){
                 this.open = !this.open;
                 this.transition();
+            },
+
+            // must pass *same* function instance to both (add|remove)EventListener, so bind in created
+            created: function() {
+              this.toggleOpen = this.toggleOpen.bind(this);
+              this.onDown = this.onDown.bind(this);
+              this.onMove = this.onMove.bind(this);
+              this.onUp = this.onUp.bind(this);
+            },
+
+            detached: function() {
+              var n = this.$.content;
+              PolymerGestures.removeEventListener(n, "up", this.toggleOpen);
+              PolymerGestures.removeEventListener(n, "up", this.onUp);
+              PolymerGestures.removeEventListener(n, "down", this.onDown);
+              PolymerGestures.removeEventListener(n, "track", this.onMove);
+              PolymerGestures.removeEventListener(n, "mouseleave", this.onUp);
             }
         });
     </script>
