@@ -22,7 +22,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
 -->
 <link rel="import" href="left-swipe-action-button.html">
 
-<polymer-element name="left-swipe-action" attributes="open nodrag offset shadow">
+<polymer-element name="left-swipe-action" attributes="open nodrag offset shadow disabled">
     <template>
         <style>
             :host {
@@ -163,7 +163,26 @@ CSS for both the main content and buttons in light DOM will be just applied.
              */
             shadow: false,
 
-            ready: function(){
+             /**
+             * If true, all gestures are disabled
+             *
+             * @attribute shadow
+             * @type boolean
+             * @default false
+             */
+            disabled: false,
+
+            disabledChanged: function(oldValue, newValue){
+              if (!newValue){
+                this.addGesturListeners();
+              }else{
+                this.open = false;
+                this.transition();
+                this.removeGestureListeners();
+              }
+            },
+
+            addGesturListeners: function(){
                 var n = this.$.content;
                 if(this.nodrag){
                     PolymerGestures.addEventListener(n, "up", this.toggleOpen);
@@ -174,6 +193,21 @@ CSS for both the main content and buttons in light DOM will be just applied.
                     PolymerGestures.addEventListener(n, "mouseleave", this.onUp);
                 }
                 this.transition();
+            },
+
+            removeGestureListeners: function(){
+                var n = this.$.content;
+                PolymerGestures.removeEventListener(n, "up", this.toggleOpen);
+                PolymerGestures.removeEventListener(n, "up", this.onUp);
+                PolymerGestures.removeEventListener(n, "down", this.onDown);
+                PolymerGestures.removeEventListener(n, "track", this.onMove);
+                PolymerGestures.removeEventListener(n, "mouseleave", this.onUp);
+            },
+
+            ready: function(){
+                if (!this.disabled){
+                    this.addGesturListeners();
+                }
             },
 
             onDown: function(e){
@@ -215,12 +249,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
             },
 
             detached: function() {
-              var n = this.$.content;
-              PolymerGestures.removeEventListener(n, "up", this.toggleOpen);
-              PolymerGestures.removeEventListener(n, "up", this.onUp);
-              PolymerGestures.removeEventListener(n, "down", this.onDown);
-              PolymerGestures.removeEventListener(n, "track", this.onMove);
-              PolymerGestures.removeEventListener(n, "mouseleave", this.onUp);
+                this.removeGestureListeners();
             }
         });
     </script>
