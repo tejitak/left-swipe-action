@@ -117,6 +117,12 @@ This can be worked with Polymer &lt;template repeat&gt; or other MVC library ([A
 <td>false</td>
 <td>If true, box shadow is added</td>
 </tr>
+<tr>
+<th>disabled</th>
+<td>boolean</td>
+<td>false</td>
+<td>If true, all gestures are disabled</td>
+</tr>
 </tbody>
 </table>
 
