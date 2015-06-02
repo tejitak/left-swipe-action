@@ -12,7 +12,8 @@
   "license": "MIT",
   "homepage": "https://github.com/tejitak/left-swipe-action",
   "dependencies": {
-    "polymer": "~0.5.2"
+    "polymer": "~1.0.2",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.1"
   },
   "ignore": [
     "**/.*"
