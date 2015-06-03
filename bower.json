@@ -1,6 +1,6 @@
 {
   "name": "left-swipe-action",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authors": [
     "tejitak"
   ],
@@ -12,7 +12,7 @@
   "license": "MIT",
   "homepage": "https://github.com/tejitak/left-swipe-action",
   "dependencies": {
-    "polymer": "~0.5.2"
+    "polymer": "~1.0.2"
   },
   "ignore": [
     "**/.*"

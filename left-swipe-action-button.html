@@ -10,27 +10,27 @@ To customize styles, please add your styles to the element.
 @element left-swipe-action-button
 @auther tejitak
 -->
-<polymer-element name="left-swipe-action-button">
-    <template>
-        <style>
-            :host {
-                display: table;
-                height: 100%;
-                padding: 0 20px;
-            }
+<dom-module id="left-swipe-action-button">
+    <style>
+        :host {
+            display: table;
+            height: 100%;
+            padding: 0 20px;
+        }
 
-            .action-button-wrapper {
-                display: table-cell;
-                vertical-align: middle;
-                font-size: 1.8rem;
-                font-weight: 300;
-            }
-        </style>
+        .action-button-wrapper {
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 1.8rem;
+            font-weight: 300;
+        }
+    </style>
+    <template>
         <div class="action-button-wrapper">
             <content></content>
         </div>
     </template>
-    <script>
-        Polymer({});
-    </script>
-</polymer-element>
+</dom-module>
+<script>
+    Polymer({is: "left-swipe-action-button"});
+</script>
