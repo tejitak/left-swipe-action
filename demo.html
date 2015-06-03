@@ -3,14 +3,14 @@
 <head>
     <title>Polymer Web Component "left-swipe-action" Demo</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:300,400,500|Source+Code+Pro:400,500,700">
     <link rel="import" href="demo/bower_components/polymer/polymer.html">
-    <link rel="import" href="demo/bower_components/font-roboto/roboto.html">
-    <link rel="import" href="demo/bower_components/core-icons/core-icons.html">
-    <link rel="import" href="demo/bower_components/core-icons/social-icons.html">
     <link rel="import" href="demo/bower_components/paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="demo/bower_components/paper-fab/paper-fab.html">
     <link rel="import" href="demo/bower_components/paper-button/paper-button.html">
+    <link rel="import" href="demo/bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="demo/bower_components/iron-icons/iron-icons.html" >
+    <link rel="import" href="demo/bower_components/iron-icons/social-icons.html" >
     <link rel="import" href="left-swipe-action.html">
     <style>
         html, body {
@@ -144,7 +144,7 @@
             <left-swipe-action-button>
                 <a href="https://github.com/tejitak/left-swipe-action" target="_blank">
                     <paper-button raised class="custom">
-                      <core-icon icon="social:post-github"></core-icon>
+                      <iron-icon icon="archive"></iron-icon>
                       View on Github
                     </paper-button>
                 </a>
@@ -205,7 +205,7 @@
         <div>
             <left-swipe-action shadow>
                 <div>
-                    <core-icon icon="arrow-back" style="margin: 30px;"></core-icon>
+                    <iron-icon icon="arrow-back" style="margin: 30px;"></iron-icon>
                 </div>
                 <left-swipe-action-button onclick="alert('favorite')"><paper-fab icon="favorite"></paper-fab></left-swipe-action-button>
             </left-swipe-action>
@@ -214,7 +214,7 @@
         <div>
             <left-swipe-action>
                 <div>
-                    <core-icon icon="arrow-back" style="margin: 30px;"></core-icon>
+                    <iron-icon icon="arrow-back" style="margin: 30px;"></iron-icon>
                 </div>
                 <left-swipe-action-button onclick="alert('favorite')"><paper-fab icon="favorite"></paper-fab></left-swipe-action-button>
             </left-swipe-action>
@@ -266,7 +266,7 @@
                     <div style="color: #abafb8; font-size: 12px">more info</div>
                 </div>
                 <left-swipe-action-button onclick="alert('cloud-download')">
-                    <core-icon icon="cloud-download"></core-icon>
+                    <iron-icon icon="cloud-download"></iron-icon>
                 </left-swipe-action-button>
             </left-swipe-action>
         </div>
@@ -305,8 +305,8 @@
     <div id="list_example">
         <div class="separator"></div>
         <h2>List example</h2>
-        <template is="auto-binding">
-            <template repeat="{{[1,2,3,4,5]}}">
+        <template is="dom-bind">
+            <template is="dom-repeat" items="[1,2,3,4,5]">
             <left-swipe-action shadow offset="40">
                 <div class="list-container">
                     <div class="list-thumb"><a href="https://twitter.com/tejitak" target="_blank"><paper-icon-button icon="social:person"></paper-icon-button></a></div>

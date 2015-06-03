@@ -21,236 +21,263 @@ CSS for both the main content and buttons in light DOM will be just applied.
 @auther tejitak
 -->
 <link rel="import" href="left-swipe-action-button.html">
+<link rel="import" href="lib/polymer-gestures/polymer-gestures.html">
 
-<polymer-element name="left-swipe-action" attributes="open nodrag offset shadow disabled">
+<dom-module id="left-swipe-action">
+    <style>
+        :host {
+            position: relative;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+        }
+
+        .swipe-underlay {
+            position: absolute;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+
+            -ms-flex-direction: row;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            -ms-flex-direction: row-reverse;
+            -webkit-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+        }
+
+        .swipe-content {
+            width: 100%;
+            background-color: #fff;
+            -webkit-transform-style: preserve-3d;
+            -moz-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            -o-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -ms-backface-visibility: hidden;
+            -o-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .cubic-bezier {
+            -webkit-transition: -webkit-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
+            -moz-transition: -moz-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
+            -ms-transition: -ms-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
+            -o-transition: -o-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
+            transition: transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
+        }
+
+        .shadow {
+            -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+            -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+        }
+    </style>
     <template>
-        <style>
-            :host {
-                position: relative;
-                display: -ms-flexbox;
-                display: -webkit-flex;
-                display: flex;
-            }
-
-            .swipe-underlay {
-                position: absolute;
-                right: 0;
-                width: 100%;
-                height: 100%;
-            }
-
-            .swipe-content {
-                width: 100%;
-                background-color: #fff;
-                -webkit-transform-style: preserve-3d;
-                -moz-transform-style: preserve-3d;
-                -ms-transform-style: preserve-3d;
-                -o-transform-style: preserve-3d;
-                transform-style: preserve-3d;
-                -webkit-backface-visibility: hidden;
-                -moz-backface-visibility: hidden;
-                -ms-backface-visibility: hidden;
-                -o-backface-visibility: hidden;
-                backface-visibility: hidden;
-            }
-
-            .fixed-true {
-                -webkit-transition: -webkit-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
-                -moz-transition: -moz-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
-                -ms-transition: -ms-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
-                -o-transition: -o-transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
-                transition: transform .5s cubic-bezier(.10, .70, .10, 1) .05s;
-            }
-
-            .shadow-true {
-                -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-                -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-            }
-        </style>
-        <div class="swipe-underlay" layout horizontal reverse>
+        <div class="swipe-underlay">
             <content select="left-swipe-action-button"></content>
         </div>
-        <div id="content" class="swipe-content fixed-{{!point.updated}} open-{{open}} shadow-{{shadow}}" touch-action="pan-y">
+        <div id="content" touch-action="pan-y">
             <content></content>
         </div>
     </template>
-    <script>
+</dom-module>
+<script>
 
-        /**
-         * Private class to have x-axis point and left flick status by checking a current and previous position
-         */
-        var xPoint = function(x){
-            this.updated = false;
-            this.x = this._prev = this._origin = x;
-            this._timeStamp = (new Date()).getTime();
-        };
+    /**
+     * Private class to have x-axis point and left flick status by checking a current and previous position
+     */
+    var xPoint = function(x){
+        this.updated = false;
+        this.x = this._prev = this._origin = x;
+        this._timeStamp = (new Date()).getTime();
+    };
 
-        xPoint.prototype = {
-            TIMER_RESET_THRESHOLD: -5/* px */,
-            VELOCITY_THRESHOLD: -0.2 /* px/ms */,
+    xPoint.prototype = {
+        TIMER_RESET_THRESHOLD: -5/* px */,
+        VELOCITY_THRESHOLD: -0.2 /* px/ms */,
 
-            distance: function(){
-                // distance between touch start and current point
-                return this.x - this._origin;
-            },
+        distance: function(){
+            // distance between touch start and current point
+            return this.x - this._origin;
+        },
 
-            update: function(x){
-                // reset time stamp at move stop
-                if(x - this.x > this.TIMER_RESET_THRESHOLD){
-                    this._timeStamp = (new Date()).getTime();
-                    this._prev = this.x;
-                }
-                this.x = x;
-                this.updated = true;
-            },
-
-            isFlick: function(){
-                var dt = (new Date()).getTime() - this._timeStamp;
-                var dx = this.x - this._prev;
-                return (dx / dt) < this.VELOCITY_THRESHOLD;
+        update: function(x){
+            // reset time stamp at move stop
+            if(x - this.x > this.TIMER_RESET_THRESHOLD){
+                this._timeStamp = (new Date()).getTime();
+                this._prev = this.x;
             }
-        };
+            this.x = x;
+            this.updated = true;
+        },
 
-        /**
-         * Utility
-         */
-        var util = {
-            applyTransform: function(n, move){
-                var value = "translate3d(" + move + "px, 0, 0)";
-                n.style.webkitTransform = value;
-                n.style.MozTransform = value;
-                n.style.msTransform = value;
-                n.style.OTransform = value;
-                n.style.transform = value;
+        isFlick: function(){
+            var dt = (new Date()).getTime() - this._timeStamp;
+            var dx = this.x - this._prev;
+            return (dx / dt) < this.VELOCITY_THRESHOLD;
+        }
+    };
+
+    Polymer({
+        is: "left-swipe-action",
+
+        properties: {
+          /**
+           * If true, the content will be opened by default
+           *
+           * @attribute open
+           * @type boolean
+           * @default false
+           */
+          open: {
+            type: Boolean,
+            value: false
+          },
+          /**
+           * If true, drag (touch move) action is disabled and a content is automatically opened by click/touch
+           *
+           * @attribute nodrag
+           * @type boolean
+           * @default false
+           */
+          nodrag: {
+            type: Boolean,
+            value: false
+          },
+          /**
+           * Offset pixcel position for opened state
+           *
+           * @attribute offset
+           * @type number
+           * @default 60
+           */
+          offset: {
+            type: Number,
+            value: 60
+          },
+          /**
+           * If true, box shadow is added
+           *
+           * @attribute shadow
+           * @type boolean
+           * @default false
+           */
+          shadow: {
+            type: Boolean,
+            value: false
+          },
+           /**
+           * If true, all gestures are disabled
+           *
+           * @attribute disabled
+           * @type boolean
+           * @default false
+           */
+          disabled: {
+            type: Boolean,
+            value: false,
+            observer: 'disabledChanged'
+          }
+        },
+
+        disabledChanged: function(oldValue, newValue){
+          if (!newValue){
+            this.addGesturListeners();
+          }else{
+            this.open = false;
+            this.transition();
+            this.removeGestureListeners();
+          }
+        },
+
+        addGesturListeners: function(){
+            var n = this.$.content;
+            if(this.nodrag){
+                PolymerGestures.addEventListener(n, "up", this.toggleOpen);
+            }else{
+                PolymerGestures.addEventListener(n, "down", this.onDown);
+                PolymerGestures.addEventListener(n, "track", this.onMove);
+                PolymerGestures.addEventListener(n, "up", this.onUp);
+                PolymerGestures.addEventListener(n, "mouseleave", this.onUp);
             }
-        };
+            this.transition();
+        },
 
-        Polymer({
-            /**
-             * If true, the content will be opened by default
-             *
-             * @attribute open
-             * @type boolean
-             * @default false
-             */
-            open: false,
+        removeGestureListeners: function(){
+            var n = this.$.content;
+            PolymerGestures.removeEventListener(n, "up", this.toggleOpen);
+            PolymerGestures.removeEventListener(n, "up", this.onUp);
+            PolymerGestures.removeEventListener(n, "down", this.onDown);
+            PolymerGestures.removeEventListener(n, "track", this.onMove);
+            PolymerGestures.removeEventListener(n, "mouseleave", this.onUp);
+        },
 
-            /**
-             * If true, drag (touch move) action is disabled and a content is automatically opened by click/touch
-             *
-             * @attribute nodrag
-             * @type boolean
-             * @default false
-             */
-            nodrag: false,
-
-            /**
-             * Offset pixcel position for opened state
-             *
-             * @attribute offset
-             * @type number
-             * @default 60
-             */
-            offset: 60,
-
-             /**
-             * If true, box shadow is added
-             *
-             * @attribute shadow
-             * @type boolean
-             * @default false
-             */
-            shadow: false,
-
-             /**
-             * If true, all gestures are disabled
-             *
-             * @attribute disabled
-             * @type boolean
-             * @default false
-             */
-            disabled: false,
-
-            disabledChanged: function(oldValue, newValue){
-              if (!newValue){
+        ready: function(){
+            this.applyClass();
+            if (!this.disabled){
                 this.addGesturListeners();
-              }else{
-                this.open = false;
-                this.transition();
-                this.removeGestureListeners();
-              }
-            },
-
-            addGesturListeners: function(){
-                var n = this.$.content;
-                if(this.nodrag){
-                    PolymerGestures.addEventListener(n, "up", this.toggleOpen);
-                }else{
-                    PolymerGestures.addEventListener(n, "down", this.onDown);
-                    PolymerGestures.addEventListener(n, "track", this.onMove);
-                    PolymerGestures.addEventListener(n, "up", this.onUp);
-                    PolymerGestures.addEventListener(n, "mouseleave", this.onUp);
-                }
-                this.transition();
-            },
-
-            removeGestureListeners: function(){
-                var n = this.$.content;
-                PolymerGestures.removeEventListener(n, "up", this.toggleOpen);
-                PolymerGestures.removeEventListener(n, "up", this.onUp);
-                PolymerGestures.removeEventListener(n, "down", this.onDown);
-                PolymerGestures.removeEventListener(n, "track", this.onMove);
-                PolymerGestures.removeEventListener(n, "mouseleave", this.onUp);
-            },
-
-            ready: function(){
-                if (!this.disabled){
-                    this.addGesturListeners();
-                }
-            },
-
-            onDown: function(e){
-                this.point = new xPoint(e.clientX);
-            },
-
-            onMove: function(e){
-                var p = this.point;
-                if(p){
-                    p.update(e.clientX);
-                    util.applyTransform(this.$.content, this.open ? this.offset - this.$.content.clientWidth + p.distance() : p.distance());
-                }
-            },
-
-            onUp: function(e){
-                var p = this.point;
-                if(!p){ return; }
-                this.open = p && p.isFlick();
-                this.point = null;
-                // apply css fixed-true before transition
-                this.async(this.transition);
-            },
-
-            transition: function(){
-                util.applyTransform(this.$.content, this.open ? this.offset - this.$.content.clientWidth : 0);
-            },
-
-            toggleOpen: function(){
-                this.open = !this.open;
-                this.transition();
-            },
-
-            // must pass *same* function instance to both (add|remove)EventListener, so bind in created
-            created: function() {
-              this.toggleOpen = this.toggleOpen.bind(this);
-              this.onDown = this.onDown.bind(this);
-              this.onMove = this.onMove.bind(this);
-              this.onUp = this.onUp.bind(this);
-            },
-
-            detached: function() {
-                this.removeGestureListeners();
             }
-        });
-    </script>
-</polymer-element>
+        },
+
+        onDown: function(e){
+            this.point = new xPoint(e.clientX);
+            this.applyClass();
+        },
+
+        onMove: function(e){
+            var p = this.point;
+            if(p){
+                p.update(e.clientX);
+                this.translate3d(this.open ? this.offset - this.$.content.clientWidth + p.distance() + "px" : p.distance() + "px", 0, 0, this.$.content);
+            }
+        },
+
+        onUp: function(e){
+            var p = this.point;
+            if(!p){ return; }
+            this.open = p && p.isFlick();
+            this.point = null;
+            this.applyClass();
+            // apply css fixed-true before transition
+            this.async(this.transition);
+        },
+
+        transition: function(){
+            this.translate3d(this.open ? this.offset - this.$.content.clientWidth + "px": 0, 0, 0, this.$.content);
+        },
+
+        toggleOpen: function(){
+            this.open = !this.open;
+            this.transition();
+        },
+
+        applyClass: function(){
+          var list = ["style-scope left-swipe-action swipe-content"]
+          if(this.nodrag || this.point === null){
+            list.push("cubic-bezier");
+          }
+          if(this.shadow){
+            list.push("shadow");            
+          }
+          this.$.content.className = list.join(" ");
+        },
+
+        // must pass *same* function instance to both (add|remove)EventListener, so bind in created
+        created: function() {
+          this.toggleOpen = this.toggleOpen.bind(this);
+          this.onDown = this.onDown.bind(this);
+          this.onMove = this.onMove.bind(this);
+          this.onUp = this.onUp.bind(this);
+        },
+
+        detached: function() {
+            this.removeGestureListeners();
+        }
+    });
+</script>
