@@ -21,7 +21,6 @@ CSS for both the main content and buttons in light DOM will be just applied.
 @auther tejitak
 -->
 <link rel="import" href="left-swipe-action-button.html">
-<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout">
 <link rel="import" href="lib/polymer-gestures/polymer-gestures.html">
 
 <dom-module id="left-swipe-action">
@@ -38,9 +37,16 @@ CSS for both the main content and buttons in light DOM will be just applied.
             right: 0;
             width: 100%;
             height: 100%;
-            @apply(--layout);
-            @apply(--layout-horizontal);
-            @apply(--layout-horizontal-reverse);
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+
+            -ms-flex-direction: row;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            -ms-flex-direction: row-reverse;
+            -webkit-flex-direction: row-reverse;
+            flex-direction: row-reverse;
         }
 
         .swipe-content {
@@ -213,10 +219,10 @@ CSS for both the main content and buttons in light DOM will be just applied.
         },
 
         ready: function(){
+            this.applyClass();
             if (!this.disabled){
                 this.addGesturListeners();
             }
-            this.applyClass();
         },
 
         onDown: function(e){
@@ -253,7 +259,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
 
         applyClass: function(){
           var list = ["style-scope left-swipe-action swipe-content"]
-          if(this.point === null){
+          if(this.nodrag || this.point === null){
             list.push("cubic-bezier");
           }
           if(this.shadow){
