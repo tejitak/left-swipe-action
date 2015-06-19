@@ -227,7 +227,8 @@ CSS for both the main content and buttons in light DOM will be just applied.
         ready: function(){
             this.applyClass();
             this.transition();
-            this.setScrollDirection('y', this.$.content);
+            // allow y scroll on this node but prevent x scroll
+            this.setScrollDirection('y');
         },
 
         onDown: function(e){
