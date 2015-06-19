@@ -21,7 +21,6 @@ CSS for both the main content and buttons in light DOM will be just applied.
 @auther tejitak
 -->
 <link rel="import" href="left-swipe-action-button.html">
-<link rel="import" href="lib/polymer-gestures/polymer-gestures.html">
 
 <dom-module id="left-swipe-action">
     <style>
@@ -82,7 +81,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
         <div class="swipe-underlay">
             <content select="left-swipe-action-button"></content>
         </div>
-        <div id="content" touch-action="pan-y">
+        <div id="content" on-track="handleTrack" on-down="handleDown" on-up="handleUp">
             <content></content>
         </div>
     </template>
@@ -187,53 +186,58 @@ CSS for both the main content and buttons in light DOM will be just applied.
         },
 
         disabledChanged: function(oldValue, newValue){
-          if (!newValue){
-            this.addGesturListeners();
-          }else{
+          if (newValue){
             this.open = false;
             this.transition();
             this.removeGestureListeners();
           }
         },
 
-        addGesturListeners: function(){
-            var n = this.$.content;
-            if(this.nodrag){
-                PolymerGestures.addEventListener(n, "up", this.toggleOpen);
-            }else{
-                PolymerGestures.addEventListener(n, "down", this.onDown);
-                PolymerGestures.addEventListener(n, "track", this.onMove);
-                PolymerGestures.addEventListener(n, "up", this.onUp);
-                PolymerGestures.addEventListener(n, "mouseleave", this.onUp);
-            }
-            this.transition();
+        handleUp: function(e){
+          if(this.nodrag){
+            this.toggleOpen();
+          }else{
+            this.onUp(e); 
+          }
+        },
+
+        handleDown: function(e){
+          this.onDown(e);
+        },
+
+        handleTrack: function(e){
+          if(this.disabled){
+            return;
+          }
+          switch(e.detail.state){
+            case 'track':
+              this.onMove(e);
+              break;
+            case 'end':
+              this.onUp(e);
+              break;
+          }
         },
 
         removeGestureListeners: function(){
-            var n = this.$.content;
-            PolymerGestures.removeEventListener(n, "up", this.toggleOpen);
-            PolymerGestures.removeEventListener(n, "up", this.onUp);
-            PolymerGestures.removeEventListener(n, "down", this.onDown);
-            PolymerGestures.removeEventListener(n, "track", this.onMove);
-            PolymerGestures.removeEventListener(n, "mouseleave", this.onUp);
+          // do not need from Polymer 1.0 gensture events?
+          // https://www.polymer-project.org/1.0/docs/devguide/events.html#gestures
         },
 
         ready: function(){
             this.applyClass();
-            if (!this.disabled){
-                this.addGesturListeners();
-            }
+            this.transition();
         },
 
         onDown: function(e){
-            this.point = new xPoint(e.clientX);
+            this.point = new xPoint(e.detail.x);
             this.applyClass();
         },
 
         onMove: function(e){
             var p = this.point;
             if(p){
-                p.update(e.clientX);
+                p.update(e.detail.x);
                 this.translate3d(this.open ? this.offset - this.$.content.clientWidth + p.distance() + "px" : p.distance() + "px", 0, 0, this.$.content);
             }
         },
