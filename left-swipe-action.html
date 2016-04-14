@@ -197,7 +197,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
           if(this.nodrag){
             this.toggleOpen();
           }else{
-            this.onUp(e); 
+            this.onUp(e);
           }
         },
 
@@ -228,7 +228,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
             this.applyClass();
             this.transition();
             // allow y scroll on this node but prevent x scroll
-            this.setScrollDirection('y');
+            this.setScrollDirection('y', this.$.content);
         },
 
         onDown: function(e){
@@ -269,7 +269,7 @@ CSS for both the main content and buttons in light DOM will be just applied.
             list.push("cubic-bezier");
           }
           if(this.shadow){
-            list.push("shadow");            
+            list.push("shadow");
           }
           this.$.content.className = list.join(" ");
         },
