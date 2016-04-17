@@ -3,14 +3,14 @@
 
 This component wraps your own element and the wrapper handles gesture events. The main content will be opened by a left swipe and specified buttons 'left-swipe-action-button' will be shown behind of the content. The other gestures on the component will close the content.
 
-    <left-swipe-action>
-        <div>
-            <div>Title</div>
-            <div>Description</div>
-        </div>
-        <left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
-        <left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
-    </left-swipe-action>
+<left-swipe-action>
+<div>
+<div>Title</div>
+<div>Description</div>
+</div>
+<left-swipe-action-button onclick="alert('delete')">Delete</left-swipe-action-button>
+<left-swipe-action-button style="background-color: #9F499B; color: #fff;" onclick="alert('favorite')">Favorite</left-swipe-action-button>
+</left-swipe-action>
 
 The elements other than left-swipe-action-button will be inserted to shadow DOM as main content.
 'left-swipe-action-button' is a button to be fit with a content height. These are aligned as table cells.
@@ -127,101 +127,123 @@ CSS for both the main content and buttons in light DOM will be just applied.
         is: "left-swipe-action",
 
         properties: {
-          /**
+            /**
            * If true, the content will be opened by default
            *
            * @attribute open
            * @type boolean
            * @default false
            */
-          open: {
-            type: Boolean,
-            value: false
-          },
-          /**
+            open: {
+                type: Boolean,
+                value: false
+            },
+            /**
            * If true, drag (touch move) action is disabled and a content is automatically opened by click/touch
            *
            * @attribute nodrag
            * @type boolean
            * @default false
            */
-          nodrag: {
-            type: Boolean,
-            value: false
-          },
-          /**
+            nodrag: {
+                type: Boolean,
+                value: false
+            },
+            /**
            * Offset pixcel position for opened state
            *
            * @attribute offset
            * @type number
            * @default 60
            */
-          offset: {
-            type: Number,
-            value: 60
-          },
-          /**
+            offset: {
+                type: Number,
+                value: 60
+            },
+            /**
            * If true, box shadow is added
            *
            * @attribute shadow
            * @type boolean
            * @default false
            */
-          shadow: {
-            type: Boolean,
-            value: false
-          },
-           /**
+            shadow: {
+                type: Boolean,
+                value: false
+            },
+            /**
            * If true, all gestures are disabled
            *
            * @attribute disabled
            * @type boolean
            * @default false
            */
-          disabled: {
-            type: Boolean,
-            value: false,
-            observer: 'disabledChanged'
-          }
+            disabled: {
+                type: Boolean,
+                value: false,
+                observer: 'disabledChanged'
+            },
+            /**
+          * Minimum threshold (in pixels) to start reacting to the swipe event
+          *
+          * @attribute threshold
+          * @type number
+          * @default 10
+          */
+            threshold: {
+                type: Number,
+                value: 15
+            },
+            /**
+           * If true, all gestures are disabled
+           *
+           * @attribute disabled
+           * @type boolean
+           * @default false
+           */
+            allowRightSwipe: {
+                type: Boolean,
+                value: false
+            }
         },
 
         disabledChanged: function(oldValue, newValue){
-          if (newValue){
-            this.open = false;
-            this.transition();
-            this.removeGestureListeners();
-          }
+            if (newValue){
+                this.open = false;
+                this.transition();
+                this.removeGestureListeners();
+            }
         },
 
         handleUp: function(e){
-          if(this.nodrag){
-            this.toggleOpen();
-          }else{
-            this.onUp(e);
-          }
+            if(this.nodrag){
+                this.toggleOpen();
+            }else{
+                this.onUp(e);
+            }
         },
 
         handleDown: function(e){
-          this.onDown(e);
+            this.onDown(e);
         },
 
         handleTrack: function(e){
-          if(this.disabled){
-            return;
-          }
-          switch(e.detail.state){
-            case 'track':
-              this.onMove(e);
-              break;
-            case 'end':
-              this.onUp(e);
-              break;
-          }
+            if(this.disabled){
+                return;
+            }
+            switch(e.detail.state){
+                case 'track':
+                    this.onMove(e);
+                    break;
+                case 'end':
+                    this.onUp(e);
+                    break;
+            }
         },
 
         removeGestureListeners: function(){
-          // do not need from Polymer 1.0 gensture events?
-          // https://www.polymer-project.org/1.0/docs/devguide/events.html#gestures
+            // do not need from Polymer 1.0 gensture events?
+            // https://www.polymer-project.org/1.0/docs/devguide/events.html#gestures
         },
 
         ready: function(){
@@ -229,6 +251,9 @@ CSS for both the main content and buttons in light DOM will be just applied.
             this.transition();
             // allow y scroll on this node but prevent x scroll
             this.setScrollDirection('y', this.$.content);
+            if (!this.allowRightSwipe) {
+                this.onMove = this._onMoveNoRight;
+            }
         },
 
         onDown: function(e){
@@ -238,7 +263,17 @@ CSS for both the main content and buttons in light DOM will be just applied.
 
         onMove: function(e){
             var p = this.point;
-            if(p){
+            var dx = e.detail.dx;
+            if (p && Math.abs(dx) > this.threshold) {
+                p.update(e.detail.x);
+                this.translate3d(this.open ? this.offset - this.$.content.clientWidth + p.distance() + "px" : p.distance() + "px", 0, 0, this.$.content);
+            }
+        },
+
+        _onMoveNoRight: function(e){
+            var p = this.point;
+            var dx = e.detail.dx;
+            if (p && dx < 0 && Math.abs(dx) > this.threshold) {
                 p.update(e.detail.x);
                 this.translate3d(this.open ? this.offset - this.$.content.clientWidth + p.distance() + "px" : p.distance() + "px", 0, 0, this.$.content);
             }
@@ -264,22 +299,22 @@ CSS for both the main content and buttons in light DOM will be just applied.
         },
 
         applyClass: function(){
-          var list = ["style-scope left-swipe-action swipe-content"]
-          if(this.nodrag || this.point === null){
-            list.push("cubic-bezier");
-          }
-          if(this.shadow){
-            list.push("shadow");
-          }
-          this.$.content.className = list.join(" ");
+            var list = ["style-scope left-swipe-action swipe-content"]
+            if(this.nodrag || this.point === null){
+                list.push("cubic-bezier");
+            }
+            if(this.shadow){
+                list.push("shadow");
+            }
+            this.$.content.className = list.join(" ");
         },
 
         // must pass *same* function instance to both (add|remove)EventListener, so bind in created
         created: function() {
-          this.toggleOpen = this.toggleOpen.bind(this);
-          this.onDown = this.onDown.bind(this);
-          this.onMove = this.onMove.bind(this);
-          this.onUp = this.onUp.bind(this);
+            this.toggleOpen = this.toggleOpen.bind(this);
+            this.onDown = this.onDown.bind(this);
+            this.onMove = this.onMove.bind(this);
+            this.onUp = this.onUp.bind(this);
         },
 
         detached: function() {
